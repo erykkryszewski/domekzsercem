@@ -1,0 +1,32 @@
+.bottom-bar {
+  width: 100%;
+  background: $dark;
+  padding: 0;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 15px 0;
+
+    @media(max-width: 767px) {
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    p {
+      color: $very-light-gray;
+      font-size: 12px;
+      margin: 0;
+
+      a {
+        color: $theme-color;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
+  }
+}
