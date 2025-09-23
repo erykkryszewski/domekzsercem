@@ -3,7 +3,6 @@
   margin: 0 auto !important;
   padding: 0 15px !important;
 }
-
 .editor-styles-wrapper .cta-hero__image {
   z-index: 0 !important;
 }
@@ -310,7 +309,6 @@
     margin-left: 91.666667%;
   }
 }
-
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
@@ -520,7 +518,6 @@
     margin-left: 91.666667%;
   }
 }
-
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
@@ -730,7 +727,6 @@
     margin-left: 91.666667%;
   }
 }
-
 @media (min-width: 1200px) {
   .container {
     max-width: 1190px;
@@ -940,24 +936,11 @@
     margin-left: 91.666667%;
   }
 }
-
 .editor-styles-wrapper {
   /**
- * Functions
- */
-  /* fix WC overwriting bootstrap classes */
-  /* overwrite wp */
-  /* reset all margins in gravity forms - delete it later from global and modify in block styles */
-  /* delete gravity forms error styles, FORM MUST BE WRAPPED WITH DIV WITH ERCODING-FORM CLASS */
-  /*slick arrow "next" and "prev" text delete */
-  /* 
- * Import fonts
- */
-  /*
- * Typography
- */
+   * Functions
+   */
 }
-
 .editor-styles-wrapper .button {
   border: 1px solid #132a3a;
   padding: 13px 25px;
@@ -985,22 +968,19 @@
   position: relative;
   overflow: hidden;
 }
-
 @media (max-width: 449px) {
   .editor-styles-wrapper .button {
     padding: 9px 20px 9.5px;
     font-size: 12px;
   }
 }
-
 .editor-styles-wrapper .button:hover {
   color: #ffffff;
   border: 1px solid #132a3a;
   background: #132a3a;
 }
-
 .editor-styles-wrapper .button:hover::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -1012,7 +992,6 @@
   -webkit-animation: mmpuu 1s forwards;
           animation: mmpuu 1s forwards;
 }
-
 @-webkit-keyframes mmpuu {
   0% {
     left: -100%;
@@ -1024,7 +1003,6 @@
     left: 100%;
   }
 }
-
 @keyframes mmpuu {
   0% {
     left: -100%;
@@ -1036,7 +1014,6 @@
     left: 100%;
   }
 }
-
 .editor-styles-wrapper .button__icon {
   width: 22px;
   height: 22px;
@@ -1044,44 +1021,36 @@
   -ms-flex-negative: 0;
       flex-shrink: 0;
 }
-
 .editor-styles-wrapper .button__icon img,
 .editor-styles-wrapper .button__icon svg {
   -webkit-filter: brightness(0) invert(1);
           filter: brightness(0) invert(1);
 }
-
 .editor-styles-wrapper .button--checkout, .editor-styles-wrapper .button--continue-shopping, .editor-styles-wrapper .button--update-cart {
   min-width: 184px;
   text-align: center;
 }
-
 .editor-styles-wrapper .button--checkout {
   margin: 20px 0 0;
 }
-
 .editor-styles-wrapper .button--continue-shopping, .editor-styles-wrapper .button--update-cart {
   margin: 10px 0 0;
   border: 1px solid #030303;
   background: transparent;
   color: #030303;
 }
-
 .editor-styles-wrapper .button--continue-shopping:hover, .editor-styles-wrapper .button--update-cart:hover {
   background: #132a3a;
   border: 1px solid #132a3a;
 }
-
 .editor-styles-wrapper .button--continue-shopping::before, .editor-styles-wrapper .button--update-cart::before {
   display: none;
 }
-
 .editor-styles-wrapper .button--ghost {
   background: transparent;
   border: 1px solid #030303;
   color: #030303;
 }
-
 .editor-styles-wrapper .button--inactive {
   background: #cecece;
   border: 1px solid #f8f9fc;
@@ -1089,25 +1058,21 @@
   pointer-events: none;
   cursor: context-menu;
 }
-
 .editor-styles-wrapper .button--inactive:hover {
   background: #cecece;
   border: 1px solid #f8f9fc;
   color: #919191;
 }
-
 .editor-styles-wrapper .button--full-width {
   display: block;
   width: 100%;
   padding: 30px 25px 31px;
   font-size: 19px;
 }
-
 .editor-styles-wrapper .button.single_add_to_cart_button {
   margin: 0;
   height: 48px;
 }
-
 .editor-styles-wrapper .button.acf-button {
   background: #f6f7f7 !important;
   padding: 0 10px !important;
@@ -1116,11 +1081,9 @@
   line-height: 2.15384615 !important;
   border: 1px solid #2271b1 !important;
 }
-
 .editor-styles-wrapper .added_to_cart {
   display: none !important;
 }
-
 .editor-styles-wrapper *,
 .editor-styles-wrapper ::after,
 .editor-styles-wrapper ::before {
@@ -1130,7 +1093,6 @@
   padding: 0;
   outline: 0 !important;
 }
-
 .editor-styles-wrapper body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1141,16 +1103,14 @@
   font-weight: 400;
   color: #030303;
 }
-
 .editor-styles-wrapper body.archive {
   padding: 0;
 }
-
 .editor-styles-wrapper select,
-.editor-styles-wrapper input[type='text'],
-.editor-styles-wrapper input[type='password'],
-.editor-styles-wrapper input[type='number'],
-.editor-styles-wrapper input[type='submit'],
+.editor-styles-wrapper input[type=text],
+.editor-styles-wrapper input[type=password],
+.editor-styles-wrapper input[type=number],
+.editor-styles-wrapper input[type=submit],
 .editor-styles-wrapper textarea {
   offset: none;
   outline: none;
@@ -1159,36 +1119,30 @@
           appearance: none;
   font-family: "Figtree", serif;
 }
-
 .editor-styles-wrapper button {
   border: none;
   background: none;
   outline: none;
   font-family: "Figtree", serif;
 }
-
 .editor-styles-wrapper button:focus {
   outline: none;
 }
-
 .editor-styles-wrapper a,
 .editor-styles-wrapper button,
-.editor-styles-wrapper input[type='submit'] {
+.editor-styles-wrapper input[type=submit] {
   cursor: pointer !important;
   font-family: "Figtree", serif;
 }
-
 .editor-styles-wrapper a {
   text-decoration: none;
   color: inherit;
   display: inline-block;
 }
-
 .editor-styles-wrapper a:hover {
   text-decoration: none;
   color: inherit;
 }
-
 .editor-styles-wrapper img,
 .editor-styles-wrapper svg {
   display: block;
@@ -1196,21 +1150,17 @@
   height: auto;
   max-width: 100%;
 }
-
 .editor-styles-wrapper .container .container {
   max-width: 100% !important;
   padding: 0 !important;
 }
-
 .editor-styles-wrapper .main--subpage {
   padding: 90px 0 0;
 }
-
 .editor-styles-wrapper .default-block.container,
 .editor-styles-wrapper .default-block.container-fluid {
   margin: 0 auto;
 }
-
 @media (min-width: 1200px) {
   .editor-styles-wrapper .default-block.container ol,
   .editor-styles-wrapper .default-block.container ul,
@@ -1219,132 +1169,128 @@
     padding: 0 0 0 18px;
   }
 }
-
 .editor-styles-wrapper .single-post .default-block.container {
   margin: 20px auto 0;
 }
-
 .editor-styles-wrapper .default-block.container .wp-block-heading,
 .editor-styles-wrapper .default-block.container .wp-block-list {
   margin: 25px 0 0;
 }
-
 .editor-styles-wrapper body.page .display-none,
 .editor-styles-wrapper body.woocommerce-page .display-none {
   display: none;
 }
-
+.editor-styles-wrapper {
+  /* fix WC overwriting bootstrap classes */
+}
 .editor-styles-wrapper .woocommerce .col-1,
 .editor-styles-wrapper .woocommerce .col-2 {
   max-width: none !important;
 }
-
+.editor-styles-wrapper {
+  /* overwrite wp */
+}
 .editor-styles-wrapper #wpadminbar {
   position: fixed !important;
 }
-
+.editor-styles-wrapper {
+  /* reset all margins in gravity forms - delete it later from global and modify in block styles */
+}
 .editor-styles-wrapper .gform_wrapper {
   margin: 0;
 }
-
 .editor-styles-wrapper .gform_body ul li {
   margin: 0 !important;
   padding: 0 !important;
 }
-
 .editor-styles-wrapper .gform_body ul li label {
   display: none !important;
 }
-
 .editor-styles-wrapper .gform_body ul li > div {
   margin: 0 !important;
 }
-
 .editor-styles-wrapper .gform_footer {
   margin: 0 !important;
   padding: 0 !important;
 }
-
+.editor-styles-wrapper {
+  /* delete gravity forms error styles, FORM MUST BE WRAPPED WITH DIV WITH ERCODING-FORM CLASS */
+}
 .editor-styles-wrapper .ercoding-form .gform_wrapper div.validation_error {
   padding: 0 !important;
   margin: 0 0 10px !important;
   font-size: 12px !important;
 }
-
 .editor-styles-wrapper .ercoding-form .gform_wrapper.gform_validation_error .gform_body .gfield.gfield_error.gfield_contains_required {
   max-width: 100% !important;
   margin: 0 !important;
   background: none !important;
   border: none !important;
 }
-
 .editor-styles-wrapper .ercoding-form .gform_wrapper.gform_validation_error .gform_body .gfield.gfield_error.gfield_contains_required input,
 .editor-styles-wrapper .ercoding-form .gform_wrapper.gform_validation_error .gform_body .gfield.gfield_error.gfield_contains_required textarea {
   border: 2px solid #d42c2c !important;
 }
-
 .editor-styles-wrapper .ercoding-form .validation_message {
   display: none !important;
 }
-
 .editor-styles-wrapper .ercoding-form .gform_validation_errors {
   padding: 16px !important;
   text-align: center;
 }
-
 .editor-styles-wrapper .ercoding-form .gform_validation_errors .gform-icon {
   display: none !important;
 }
-
 .editor-styles-wrapper .gfield_required.gfield_required_text {
   font-style: normal !important;
   font-size: 12px !important;
   color: #030303 !important;
 }
-
 .editor-styles-wrapper .gfield_required_text {
   display: none !important;
 }
-
 .editor-styles-wrapper .gform_wrapper.gravity-theme .gform_validation_errors {
   border-radius: 15px !important;
   margin: 0 0 25px !important;
 }
-
 .editor-styles-wrapper .gform_error-message {
   margin: 0;
 }
-
+.editor-styles-wrapper {
+  /*slick arrow "next" and "prev" text delete */
+}
 .editor-styles-wrapper .slick-prev,
 .editor-styles-wrapper .slick-next {
   font-size: 0px;
 }
-
 @media (max-width: 767px) {
   .editor-styles-wrapper #wpadminbar {
     display: none !important;
   }
 }
-
 .editor-styles-wrapper ul > li,
 .editor-styles-wrapper ol > li {
   list-style: none;
 }
-
 .editor-styles-wrapper .container-fluid--max-width {
   max-width: 2200px;
 }
-
 .editor-styles-wrapper .container-fluid--padding {
   padding: 0 30px;
 }
-
 @media (max-width: 991px) {
   .editor-styles-wrapper .container-fluid--padding {
     padding: 0 15px;
   }
 }
-
+.editor-styles-wrapper {
+  /* 
+   * Import fonts
+   */
+  /*
+   * Typography
+   */
+}
 .editor-styles-wrapper h1, .editor-styles-wrapper .h1, .editor-styles-wrapper h1 > strong, .editor-styles-wrapper h1 > b, .editor-styles-wrapper h1 > span {
   color: #030303;
   font-family: "Figtree", serif;
@@ -1353,13 +1299,11 @@
   font-weight: 800;
   text-transform: uppercase;
 }
-
 @media (max-width: 767px) {
   .editor-styles-wrapper h1, .editor-styles-wrapper .h1, .editor-styles-wrapper h1 > strong, .editor-styles-wrapper h1 > b, .editor-styles-wrapper h1 > span {
     font-size: 58px;
   }
 }
-
 .editor-styles-wrapper h2, .editor-styles-wrapper .h2, .editor-styles-wrapper h2 > strong, .editor-styles-wrapper h2 > b, .editor-styles-wrapper h2 > span {
   color: #030303;
   font-family: "Figtree", serif;
@@ -1367,13 +1311,11 @@
   line-height: 1.1;
   font-weight: 700;
 }
-
 @media (max-width: 1199px) {
   .editor-styles-wrapper h2, .editor-styles-wrapper .h2, .editor-styles-wrapper h2 > strong, .editor-styles-wrapper h2 > b, .editor-styles-wrapper h2 > span {
     font-size: 30px;
   }
 }
-
 .editor-styles-wrapper h3, .editor-styles-wrapper .h3, .editor-styles-wrapper h3 > strong, .editor-styles-wrapper h3 > b, .editor-styles-wrapper h3 > span {
   color: #030303;
   font-family: "Figtree", serif;
@@ -1381,13 +1323,11 @@
   line-height: 1.1;
   font-weight: 700;
 }
-
 @media (max-width: 1199px) {
   .editor-styles-wrapper h3, .editor-styles-wrapper .h3, .editor-styles-wrapper h3 > strong, .editor-styles-wrapper h3 > b, .editor-styles-wrapper h3 > span {
     font-size: 22px;
   }
 }
-
 .editor-styles-wrapper h4, .editor-styles-wrapper .h4, .editor-styles-wrapper h4 > strong, .editor-styles-wrapper h4 > b, .editor-styles-wrapper h4 > span {
   color: #030303;
   font-family: "Figtree", serif;
@@ -1395,13 +1335,11 @@
   line-height: 1.1;
   font-weight: 600;
 }
-
 @media (max-width: 1199px) {
   .editor-styles-wrapper h4, .editor-styles-wrapper .h4, .editor-styles-wrapper h4 > strong, .editor-styles-wrapper h4 > b, .editor-styles-wrapper h4 > span {
     font-size: 18px;
   }
 }
-
 .editor-styles-wrapper p, .editor-styles-wrapper .paragraph {
   font-size: 17px;
   line-height: 1.65;
@@ -1409,7 +1347,6 @@
   margin: 20px 0 0;
   color: #030303;
 }
-
 .editor-styles-wrapper p > a, .editor-styles-wrapper .paragraph > a {
   font-weight: 500;
   font-size: 17px;
@@ -1418,39 +1355,33 @@
   display: inline-block;
   color: #030303;
 }
-
 .editor-styles-wrapper p > a:hover, .editor-styles-wrapper .paragraph > a:hover {
   text-decoration: underline;
   color: #030303;
 }
-
 .editor-styles-wrapper p > strong, .editor-styles-wrapper .paragraph > strong {
   font-weight: 600;
   font-size: 17px;
   line-height: 1.65;
   color: #030303;
 }
-
 .editor-styles-wrapper p > span, .editor-styles-wrapper .paragraph > span {
   font-size: 17px;
   line-height: 1.65;
   font-weight: 400;
   color: #030303;
 }
-
 .editor-styles-wrapper ul > li, .editor-styles-wrapper ol > li, .editor-styles-wrapper ul.wp-block-list li, .editor-styles-wrapper ol.wp-block-list li {
   font-size: 17px;
   line-height: 1.65;
   font-weight: 400;
 }
-
 .editor-styles-wrapper ul > li > strong, .editor-styles-wrapper ol > li > strong, .editor-styles-wrapper ul.wp-block-list li > strong, .editor-styles-wrapper ol.wp-block-list li > strong {
   font-weight: 600;
   font-size: 17px;
   line-height: 1.65;
   color: #030303;
 }
-
 .editor-styles-wrapper ul > li > span, .editor-styles-wrapper ol > li > span, .editor-styles-wrapper ul.wp-block-list li > span, .editor-styles-wrapper ol.wp-block-list li > span {
   font-size: 17px;
   line-height: 1.65;
@@ -1463,7 +1394,7 @@
 }
 
 #adminmenu .dashicons-admin-post::before {
-  content: '\f123';
+  content: "\f123";
 }
 
 .acf-fields .acf-field.editor-small .acf-editor-wrap iframe {
@@ -1478,7 +1409,6 @@
 .block-editor-block-list__block {
   margin: 25px auto 0 !important;
 }
-
 .block-editor-block-list__block li {
   margin: 5px auto 0 !important;
 }
@@ -1490,3 +1420,5 @@
 .editor-styles-wrapper ol > li {
   list-style: decimal;
 }
+
+/*# sourceMappingURL=style-editor.css.map */
