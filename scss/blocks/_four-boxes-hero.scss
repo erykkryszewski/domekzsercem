@@ -1,4 +1,9 @@
-.four-boxes-hero{
-	position:relative;
-	width:100%;
+.four-boxes-hero {
+  position: relative;
+  width: 100%;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+  }
 }

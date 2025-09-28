@@ -153,6 +153,12 @@ function restoreIgnoreBlocks(input, map) {
   return out;
 }
 
+function looksLikeHeaderWithUnclosedRoots(html) {
+  const hasOpen = /<html\b|<body\b/i.test(html);
+  const hasClose = /<\/html>|<\/body>/i.test(html);
+  return hasOpen && !hasClose;
+}
+
 async function loadPrettier() {
   return (await eval("import('prettier')")).default;
 }
@@ -164,11 +170,14 @@ async function loadPrettier() {
   }
   const abs = path.resolve(file);
   const rel = path.relative(process.cwd(), abs).replace(/\\/g, '/');
+  const base = path.basename(abs);
   const isBlocks = /(^|\/)acf\/blocks\/[^/]+\.php$/.test(rel);
-  const isRootPhp = /^[^/]+\.php$/.test(rel) && path.basename(abs) !== 'functions.php';
+  const isRootPhp = /^[^/]+\.php$/.test(rel) && base !== 'functions.php';
   if (!(isBlocks || isRootPhp)) process.exit(0);
+
   const raw = fs.readFileSync(abs, 'utf8');
   const prettier = await loadPrettier();
+
   let preamble = '';
   let body = raw;
   if (raw.startsWith('<?php')) {
@@ -178,6 +187,7 @@ async function loadPrettier() {
       body = raw.slice(end + 2);
     }
   }
+
   let out = '';
   if (preamble) {
     const fmtPhp = await prettier.format(normalizeLF(preamble), {
@@ -188,33 +198,49 @@ async function loadPrettier() {
     });
     out += fmtPhp.trimEnd() + '\n\n';
   }
+
   if (body) {
     let html = normalizeLF(body).replace(/^\s+/, '');
-    const encIgnored = encodeIgnoreBlocks(html);
-    html = encIgnored.html;
-    const ignoreMap = encIgnored.map;
-    const { html: encoded, map } = encodePhpRightAfterTagName(html);
-    const { html: shimmed, added } = addPartialShims(encoded);
-    let formatted;
-    try {
-      formatted = await prettier.format(shimmed, {
-        parser: 'html',
-        embeddedLanguageFormatting: 'off',
-        htmlWhitespaceSensitivity: 'ignore',
-        printWidth: 240,
-        tabWidth: 4,
-      });
-    } catch (err) {
-      formatted = shimmed;
+
+    const skipHtmlFormattingCompletely = base.toLowerCase() === 'header.php' || looksLikeHeaderWithUnclosedRoots(html);
+
+    if (skipHtmlFormattingCompletely) {
+      html = collapsePhpBlockNewlines(html);
+      out += html;
+    } else {
+      const encIgnored = encodeIgnoreBlocks(html);
+      html = encIgnored.html;
+      const ignoreMap = encIgnored.map;
+      const encodedObj = encodePhpRightAfterTagName(html);
+      html = encodedObj.html;
+      const phpMap = encodedObj.map;
+      const shimmedObj = addPartialShims(html);
+      const shimmed = shimmedObj.html;
+      const added = shimmedObj.added;
+
+      let formatted;
+      try {
+        formatted = await prettier.format(shimmed, {
+          parser: 'html',
+          embeddedLanguageFormatting: 'off',
+          htmlWhitespaceSensitivity: 'ignore',
+          printWidth: 240,
+          tabWidth: 4,
+        });
+      } catch (err) {
+        formatted = shimmed;
+      }
+
+      let restored = restorePhpRightAfterTagName(formatted, phpMap);
+      restored = removePartialShims(restored, added);
+      restored = collapsePhpBlockNewlines(restored);
+      restored = collapseInlinePhpWhitespaceInAttrs(restored);
+      restored = collapseMultilineAttributes(restored, 240);
+      restored = restoreIgnoreBlocks(restored, ignoreMap);
+      out += restored;
     }
-    let restored = restorePhpRightAfterTagName(formatted, map);
-    restored = removePartialShims(restored, added);
-    restored = collapsePhpBlockNewlines(restored);
-    restored = collapseInlinePhpWhitespaceInAttrs(restored);
-    restored = collapseMultilineAttributes(restored, 240);
-    restored = restoreIgnoreBlocks(restored, ignoreMap);
-    out += restored;
   }
+
   fs.writeFileSync(abs, out, 'utf8');
 })().catch(() => {
   process.exit(1);

@@ -1,49 +1,55 @@
 import $ from 'jquery';
 
 document.addEventListener('DOMContentLoaded', function () {
-  const sliderElement = document.querySelector('.gallery__slider');
-  if (!sliderElement) return;
+  const sliderElements = document.querySelectorAll('.gallery__slider');
 
-  const $slider = jQuery(sliderElement);
-  if ($slider.length && typeof $slider.slick === 'function') {
-    $slider.slick({
-      dots: false,
-      arrows: false,
-      infinite: false,
-      speed: 550,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      pauseOnHover: false,
-      pauseOnDotsHover: false,
-      pauseOnFocus: false,
-      cssEase: 'ease-out',
-      swipe: false,
-      draggable: false,
-      responsive: [
-        {
-          breakpoint: 1100,
-          settings: {
-            slidesToShow: 3,
-          },
-        },
-        {
-          breakpoint: 700,
-          settings: {
-            slidesToShow: 2,
-          },
-        },
-      ],
-    });
-  }
+  if (!sliderElements.length) return;
 
-  const prevArrow = document.querySelector('.slick-prev');
-  const nextArrow = document.querySelector('.slick-next');
-  const dotButtons = document.querySelectorAll('ul.slick-dots > li > button');
-  if (prevArrow) prevArrow.textContent = '';
-  if (nextArrow) nextArrow.textContent = '';
-  dotButtons.forEach(function (btn) {
-    btn.textContent = '';
+  sliderElements.forEach(function (sliderElement) {
+    const $slider = $(sliderElement);
+
+    if ($slider.length && typeof $slider.slick === 'function') {
+      $slider.slick({
+        dots: false,
+        arrows: false,
+        infinite: false,
+        speed: 550,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 5000,
+        pauseOnHover: false,
+        pauseOnDotsHover: false,
+        pauseOnFocus: false,
+        cssEase: 'ease-out',
+        swipe: false,
+        draggable: false,
+        responsive: [
+          {
+            breakpoint: 1100,
+            settings: {
+              slidesToShow: 2,
+            },
+          },
+          {
+            breakpoint: 700,
+            settings: {
+              slidesToShow: 1,
+            },
+          },
+        ],
+      });
+
+      // Clear arrow and dot button text **within this slider**
+      const prevArrow = sliderElement.querySelector('.slick-prev');
+      const nextArrow = sliderElement.querySelector('.slick-next');
+      const dotButtons = sliderElement.querySelectorAll('ul.slick-dots > li > button');
+
+      if (prevArrow) prevArrow.textContent = '';
+      if (nextArrow) nextArrow.textContent = '';
+      dotButtons.forEach(function (btn) {
+        btn.textContent = '';
+      });
+    }
   });
 });

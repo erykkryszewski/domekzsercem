@@ -16,15 +16,12 @@ Text Domain: ercodingtheme
 @import 'scss/integrations/bootstrap';
 @import 'scss/integrations/fancybox';
 @import 'scss/integrations/slick';
-
 @import 'scss/variables';
 @import 'scss/style-editor-variables';
-
 @import 'scss/global/functions';
 @import 'scss/global/typography';
 @import 'scss/global/global';
 @import 'scss/global/classes';
-
 @import 'scss/components/preloader';
 @import 'scss/components/button';
 @import 'scss/components/hamburger';
@@ -43,21 +40,23 @@ Text Domain: ercodingtheme
 @import 'scss/components/bottom-bar';
 @import 'scss/components/pagination';
 @import 'scss/components/popup';
+@import 'scss/components/booking-box';
 
 /* @blocks:start */
-@import "scss/blocks/contact";
-@import "scss/blocks/text-with-image";
-@import "scss/blocks/border-divider";
-@import "scss/blocks/icons";
-@import "scss/blocks/gallery";
-@import "scss/blocks/section-title";
-@import "scss/blocks/wyswig-content";
-@import "scss/blocks/blank-button";
-@import "scss/blocks/four-boxes-hero";
-@import "scss/blocks/small-icons";
-@import "scss/blocks/two-columns-icons";
-@import "scss/blocks/two-box-promo";
-@import "scss/blocks/static-gallery";
+@import 'scss/blocks/contact';
+@import 'scss/blocks/text-with-image';
+@import 'scss/blocks/border-divider';
+@import 'scss/blocks/icons';
+@import 'scss/blocks/gallery';
+@import 'scss/blocks/section-title';
+@import 'scss/blocks/wyswig-content';
+@import 'scss/blocks/blank-button';
+@import 'scss/blocks/four-boxes-hero';
+@import 'scss/blocks/small-icons';
+@import 'scss/blocks/two-columns-icons';
+@import 'scss/blocks/two-box-promo';
+@import 'scss/blocks/static-gallery';
+
 /* @blocks:end */
 
 @import 'scss/sections/header';
@@ -66,5 +65,3 @@ Text Domain: ercodingtheme
 @import 'scss/sections/blog';
 @import 'scss/sections/single';
 @import 'scss/sections/rules-pages';
-
-

@@ -13,7 +13,7 @@ import '@fancyapps/fancybox';
 
 window.addEventListener('load', function () {
   // AOS.refresh();
-  $('.preloader').fadeOut(100);
+  $('.preloader').fadeOut(400);
 
   if ($('.products__elements').length > 0 && window.innerWidth < 768) {
     $('html, body')
@@ -92,4 +92,4 @@ import './components/popup';
 import './components/animated-number';
 import './components/form';
 import './components/phone-number';
-
+import './components/booking-box';

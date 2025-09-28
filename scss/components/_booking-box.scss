@@ -1,0 +1,111 @@
+.booking-box {
+  background: $theme-color2;
+  border-radius: 12px;
+  padding: 16px;
+  color: #0f172a;
+
+  &__intro {
+    margin-bottom: 12px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+
+  &__title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  &__date {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: grid;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  &__input,
+  &__select {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    background: #fff;
+    color: #0f172a;
+  }
+
+  &__input {
+    border: none;
+    padding: 0;
+    height: 28px;
+  }
+
+  &__guests {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  &__summary {
+    background: rgb(255 255 255 / 35%);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  &__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #0f172a;
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  &__note {
+    margin: 12px 0 0;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 25%);
+  }
+
+  &__actions {
+    margin-top: 8px;
+  }
+
+  &__button {
+    width: 100%;
+  }
+}

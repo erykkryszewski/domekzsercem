@@ -79,8 +79,31 @@ svg {
 }
 
 .main {
+  width: 100%;
+
   &--subpage {
     padding: 90px 0 0;
+  }
+
+  &__wrapper {
+    width: 100%;
+    max-width: 1290px;
+    margin: 0 auto;
+    display: flex;
+    gap: 15px;
+    overflow: hidden;
+  }
+
+  &__column {
+    width: 100%;
+
+    &--left {
+      max-width: 900px;
+    }
+
+    &--right {
+      max-width: 390px;
+    }
   }
 }
 
@@ -90,7 +113,7 @@ svg {
 
   ol,
   ul {
-    @media (min-width: 1200px) {
+    @media (width >= 1200px) {
       padding: 0 0 0 18px;
     }
   }
@@ -215,15 +238,15 @@ body.woocommerce-page .display-none {
   margin: 0;
 }
 
-/*slick arrow "next" and "prev" text delete */
+/* slick arrow "next" and "prev" text delete */
 
 .slick-prev,
 .slick-next {
-  font-size: 0px;
+  font-size: 0;
 }
 
 #wpadminbar {
-  @media (max-width: 767px) {
+  @media (width <= 767px) {
     display: none !important;
   }
 }
@@ -241,7 +264,7 @@ ol > li {
   &--padding {
     padding: 0 30px;
 
-    @media (max-width: 991px) {
+    @media (width <= 991px) {
       padding: 0 15px;
     }
   }
