@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
   let main = document.querySelector('main#main');
   let body = document.body;
 
-  let headerHeight = header.offsetHeight;
-  let footerHeight = footer.offsetHeight + 60;
-  let footerHeightWithAdminBar = footer.offsetHeight + 60 + 32;
+  let headerHeight = header ? header.offsetHeight : 0;
+  let footerHeight = footer ? footer.offsetHeight + 60 : 60;
+  let footerHeightWithAdminBar = footer ? footer.offsetHeight + 60 + 32 : 92;
+
+  if (!main) return;
 
   if (body.classList.contains('admin-bar')) {
     main.style.minHeight = 'calc(100vh - ' + footerHeightWithAdminBar + 'px)';
@@ -16,9 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
     main.style.paddingTop = headerHeight + 'px';
   }
 
-  // divide main for booking-box
-  const bodyElement = document.body;
-  if (!bodyElement || !bodyElement.classList.contains('theme-frontpage')) return;
   const mainElement = document.querySelector('main');
   if (!mainElement) return;
   if (mainElement.querySelector('.main__wrapper')) return;
@@ -40,8 +39,16 @@ document.addEventListener('DOMContentLoaded', function () {
   mainWrapperElement.appendChild(mainColumnRightElement);
 
   const childrenArray = Array.prototype.slice.call(mainElement.children);
-  let startIndex = fourBoxesHeroElement ? childrenArray.indexOf(fourBoxesHeroElement) + 1 : 0;
+  let startIndex = 0;
+
+  if (fourBoxesHeroElement) {
+    startIndex = childrenArray.indexOf(fourBoxesHeroElement) + 1;
+  } else if (childrenArray[0] && childrenArray[0].classList && childrenArray[0].classList.contains('section-title')) {
+    startIndex = 1;
+  }
+
   let endIndex = childrenArray.indexOf(bookingBoxElement);
+  if (endIndex === -1) endIndex = childrenArray.length;
 
   const leftGroupElements = [];
   for (let i = startIndex; i < endIndex; i++) {
@@ -57,8 +64,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (fourBoxesHeroElement && fourBoxesHeroElement.nextSibling) {
     mainElement.insertBefore(mainWrapperElement, fourBoxesHeroElement.nextSibling);
-  } else if (fourBoxesHeroElement) {
-    mainElement.appendChild(mainWrapperElement);
+  } else if (
+    childrenArray[0] &&
+    childrenArray[0].classList &&
+    childrenArray[0].classList.contains('section-title') &&
+    childrenArray[0].nextSibling
+  ) {
+    mainElement.insertBefore(mainWrapperElement, childrenArray[0].nextSibling);
   } else if (childrenArray.length > 0) {
     mainElement.insertBefore(mainWrapperElement, childrenArray[0]);
   } else {
