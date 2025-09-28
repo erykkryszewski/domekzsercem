@@ -1,0 +1,24 @@
+{
+  "key": "group_7061818e7b89",
+  "title": "Block: Four Boxes Hero",
+  "fields": [],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/four-boxes-hero"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": "",
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "show_in_rest": 0,
+  "modified": 1759063834
+}

@@ -45,47 +45,19 @@ Text Domain: ercodingtheme
 @import 'scss/components/popup';
 
 /* @blocks:start */
-@import 'scss/blocks/blank-button';
-@import 'scss/blocks/blank-image';
-@import 'scss/blocks/blog-archive';
-@import 'scss/blocks/border-divider';
-@import 'scss/blocks/button-banner';
-@import 'scss/blocks/contact';
-@import 'scss/blocks/counter';
-@import 'scss/blocks/cta-hero';
-@import 'scss/blocks/cta';
-@import 'scss/blocks/decorated-text';
-@import 'scss/blocks/faq';
-@import 'scss/blocks/gallery';
-@import 'scss/blocks/hero-slider';
-@import 'scss/blocks/icons';
-@import 'scss/blocks/iframe';
-@import 'scss/blocks/list';
-@import 'scss/blocks/logos';
-@import 'scss/blocks/map';
-@import 'scss/blocks/motto-bar';
-@import 'scss/blocks/numbers';
-@import 'scss/blocks/offer';
-@import 'scss/blocks/popular-products';
-@import 'scss/blocks/program';
-@import 'scss/blocks/section-title';
-@import 'scss/blocks/shortcode';
-@import 'scss/blocks/stats';
-@import 'scss/blocks/subpage-hero';
-@import 'scss/blocks/team';
-@import 'scss/blocks/testimonials';
-@import 'scss/blocks/text-image-decorated';
-@import 'scss/blocks/text-images';
-@import 'scss/blocks/text-with-image';
-@import 'scss/blocks/thank-you';
-@import 'scss/blocks/three-boxes';
-@import 'scss/blocks/three-columns-content';
-@import 'scss/blocks/three-images';
-@import 'scss/blocks/two-buttons';
-@import 'scss/blocks/two-columns-list';
-@import 'scss/blocks/two-columns-text';
-@import 'scss/blocks/two-images';
-@import 'scss/blocks/wyswig-content';
+@import "scss/blocks/contact";
+@import "scss/blocks/text-with-image";
+@import "scss/blocks/border-divider";
+@import "scss/blocks/icons";
+@import "scss/blocks/gallery";
+@import "scss/blocks/section-title";
+@import "scss/blocks/wyswig-content";
+@import "scss/blocks/blank-button";
+@import "scss/blocks/four-boxes-hero";
+@import "scss/blocks/small-icons";
+@import "scss/blocks/two-columns-icons";
+@import "scss/blocks/two-box-promo";
+@import "scss/blocks/static-gallery";
 /* @blocks:end */
 
 @import 'scss/sections/header';
@@ -94,4 +66,5 @@ Text Domain: ercodingtheme
 @import 'scss/sections/blog';
 @import 'scss/sections/single';
 @import 'scss/sections/rules-pages';
+
 
