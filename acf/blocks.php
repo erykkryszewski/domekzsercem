@@ -45,4 +45,5 @@ return [
 	'two-columns-icons' => [ 'title' => __('Two Columns Icons', 'ercodingtheme'), 'category' => 'ercodingtheme', 'align' => 'full' ],
 	'two-box-promo' => [ 'title' => __('Two Box Promo', 'ercodingtheme'), 'category' => 'ercodingtheme', 'align' => 'full' ],
 	'static-gallery' => [ 'title' => __('Static Gallery', 'ercodingtheme'), 'category' => 'ercodingtheme', 'align' => 'full' ],
+	'booking-form' => [ 'title' => __('Booking Form', 'ercodingtheme'), 'category' => 'ercodingtheme', 'align' => 'full' ],
 ];

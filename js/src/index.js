@@ -81,6 +81,7 @@ import './blocks/small-icons';
 import './blocks/two-columns-icons';
 import './blocks/two-box-promo';
 import './blocks/static-gallery';
+import './blocks/booking-form';
 /* @blocks:end */
 
 import './sections/header';
@@ -93,3 +94,4 @@ import './components/animated-number';
 import './components/form';
 import './components/phone-number';
 import './components/booking-box';
+

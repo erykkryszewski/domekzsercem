@@ -226,6 +226,11 @@ async function loadPrettier() {
   if (body) {
     let html = normalizeLF(body).replace(/^\s+/, '');
     const protect = shouldProtectRoots(base, html);
+
+    const shimPre = addPartialShims(html);
+    html = shimPre.html;
+    const shimsAdded = shimPre.added;
+
     if (protect) html = encodeRoots(html);
 
     const encIgnored = encodeIgnoreBlocks(html);
@@ -235,10 +240,6 @@ async function loadPrettier() {
     const encPhpEarly = encodePhpRightAfterTagName(html);
     html = encPhpEarly.html;
     const phpMap = encPhpEarly.map;
-
-    const shim = addPartialShims(html);
-    html = shim.html;
-    const added = shim.added;
 
     let formatted;
     try {
@@ -254,12 +255,14 @@ async function loadPrettier() {
     }
 
     let restored = restorePhpRightAfterTagName(formatted, phpMap);
-    restored = removePartialShims(restored, added);
     restored = collapsePhpBlockNewlines(restored);
     restored = collapseInlinePhpWhitespaceInAttrs(restored);
     restored = collapseMultilineAttributes(restored, 240);
     restored = restoreIgnoreBlocks(restored, ignoreMap);
+
     if (protect) restored = decodeRoots(restored, base);
+
+    restored = removePartialShims(restored, shimsAdded);
 
     out += restored;
   }

@@ -12,7 +12,8 @@
     "small-icons",
     "two-columns-icons",
     "two-box-promo",
-    "static-gallery"
+    "static-gallery",
+    "booking-form"
   ],
   "aliases": {
     "scss": {

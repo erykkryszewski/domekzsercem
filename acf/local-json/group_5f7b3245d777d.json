@@ -356,7 +356,7 @@
         },
         {
             "key": "field_6122cd4b70d6d",
-            "label": "Footer second column content",
+            "label": "Pierwsza kolumna",
             "name": "footer_second_column_content",
             "aria-label": "",
             "type": "wysiwyg",
@@ -376,7 +376,7 @@
         },
         {
             "key": "field_6122cd6870d6e",
-            "label": "Footer third column content",
+            "label": "Druga kolumna",
             "name": "footer_third_column_content",
             "aria-label": "",
             "type": "wysiwyg",
@@ -573,5 +573,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757513779
+    "modified": 1759086632
 }

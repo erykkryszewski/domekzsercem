@@ -1,5 +1,5 @@
 .footer {
-  background: $very-light-gray;
+  background: $theme-color;
   width: 100%;
   margin: 70px 0 0;
 
@@ -14,16 +14,19 @@
   &__logo {
     display: inline-block;
 
-    img, svg {
+    img,
+    svg {
       max-width: 200px;
       height: auto;
     }
   }
 
-  &__phone, &__email {
+  &__phone,
+  &__email {
     display: block;
     font-weight: 400;
     font-size: 16px;
+    color: $theme-color2;
   }
 
   &__phone {
@@ -34,7 +37,7 @@
     span {
       display: block;
       font-size: 16px;
-      color: $black;
+      color: $theme-color2;
       font-weight: 500;
       margin: 15px 0 0;
     }
@@ -46,17 +49,26 @@
   }
 
   &__subtitle {
-    @media(max-width: 767px) {
+    @media (width <= 767px) {
       margin: 25px auto 0;
     }
   }
 
   &__column {
     width: 100%;
-    
-    h1, h2, h3, h4 {
-      @extend .h3;
+
+    h1,
+    h2,
+    h3,
+    h4 {
       margin: 3px 0 0;
+      color: $theme-color2;
+
+      @extend .h3;
+    }
+
+    p {
+      color: $theme-color2;
     }
 
     ul {
@@ -66,9 +78,10 @@
       li {
         margin: 8px 0 0;
         list-style: none;
+        color: $theme-color2;
 
         a {
-          color: $black;
+          color: $theme-color2;
           font-size: 16px;
           line-height: 1.5;
           max-width: 200px;
