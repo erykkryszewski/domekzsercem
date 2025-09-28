@@ -10,7 +10,11 @@ $gallery = get_field("gallery");
     <div class="section-id" id="<?php echo esc_html($section_id); ?>"></div>
     <?php endif; ?>
     <div class="container">
-        <div class="static-gallery__wrapper"><?php foreach ($gallery as $key => $item): ?> <?php endforeach; ?></div>
+        <div class="static-gallery__wrapper">
+            <?php foreach ($gallery as $key => $item): ?> <?php if (!empty($item['image'])): ?>
+            <div class="static-gallery__image"><?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => 'object-fit-cover']); ?></div>
+            <?php endif; ?> <?php endforeach; ?>
+        </div>
     </div>
 </div>
 <?php endif; ?>

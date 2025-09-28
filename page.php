@@ -9,6 +9,6 @@ $subpage_hero = get_field("subpage_hero", "options");
 
 <main id="main" class="main <?php if (!is_front_page()) { echo 'main--subpage'; } ?> <?php if (strpos($url, 'polityka-prywatnosci') !== false || strpos($url, 'regulamin') !== false) { echo 'main--rules-page'; } ?>"
 >
-    <?php the_content(); ?> <?php get_template_part('template-parts/booking-box'); ?>
+    <?php the_content(); ?> <?php if (strpos($url, 'zarezerwuj') == false): ?> <?php get_template_part('template-parts/booking-box'); ?> <?php endif; ?>
 </main>
 <?php get_footer(); ?>

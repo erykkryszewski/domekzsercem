@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const mainElement = document.querySelector('main');
   if (!mainElement) return;
   if (mainElement.querySelector('.main__wrapper')) return;
+  if (mainElement.querySelector('.booking-form')) return;
+
   const bookingBoxElement = mainElement.querySelector('.booking-box');
   if (!bookingBoxElement) return;
 
