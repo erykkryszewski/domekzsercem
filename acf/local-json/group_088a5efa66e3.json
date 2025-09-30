@@ -58,10 +58,10 @@
         },
         {
             "key": "field_68d98402b557d",
-            "label": "Lewa górna kolumna",
-            "name": "left_up_column",
+            "label": "Górna część",
+            "name": "right_up_content",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -70,35 +70,61 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 1
-        },
-        {
-            "key": "field_68d98416b557e",
-            "label": "Prawa górna kolumna",
-            "name": "right_up_column",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 1
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_68db88523bc2f",
+                    "label": "Ile dni",
+                    "name": "days",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "br",
+                    "parent_repeater": "field_68d98402b557d"
+                },
+                {
+                    "key": "field_68db88643bc30",
+                    "label": "Rabat",
+                    "name": "discount",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "br",
+                    "parent_repeater": "field_68d98402b557d"
+                }
+            ]
         },
         {
             "key": "field_68d9843cb557f",
-            "label": "Lewa dolna kolumna",
+            "label": "Prawa dolna kolumna",
             "name": "left_down_column",
             "aria-label": "",
             "type": "wysiwyg",
@@ -158,5 +184,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1759085661
+    "modified": 1759218193
 }
