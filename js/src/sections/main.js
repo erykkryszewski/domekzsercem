@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!mainElement) return;
   if (mainElement.querySelector('.main__wrapper')) return;
   if (mainElement.querySelector('.booking-form')) return;
+  if (window.location.href.indexOf('dziekujemy') != -1) return;
 
   const bookingBoxElement = mainElement.querySelector('.booking-box');
   if (!bookingBoxElement) return;
