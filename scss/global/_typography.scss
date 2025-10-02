@@ -13,12 +13,12 @@ h1 > b,
 h1 > span {
   color: $text-color;
   font-family: $font-primary;
-  font-size: 50;
+  font-size: 44px;
   line-height: 1.1;
   font-weight: 700;
 
   @media (width <= 767px) {
-    font-size: 58px;
+    font-size: 44px;
   }
 }
 
@@ -29,12 +29,12 @@ h2 > b,
 h2 > span {
   color: $text-color;
   font-family: $font-primary;
-  font-size: 30px;
+  font-size: 27px;
   line-height: 1.1;
-  font-weight: 600;
+  font-weight: 500;
 
   @media (width <= 1199px) {
-    font-size: 30px;
+    font-size: 25px;
   }
 }
 
@@ -50,7 +50,7 @@ h3 > span {
   font-weight: 600;
 
   @media (width <= 1199px) {
-    font-size: 22px;
+    font-size: 21px;
   }
 }
 
@@ -66,7 +66,7 @@ h4 > span {
   font-weight: 600;
 
   @media (width <= 1199px) {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
