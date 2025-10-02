@@ -3,6 +3,20 @@
   border-radius: 12px;
   padding: 16px;
   color: #0f172a;
+  position: absolute;
+  width: calc(100% - 30px);
+  max-width: 328px;
+  top: 30px;
+  z-index: 5;
+  transition:
+    top 0.2s ease,
+    left 0.2s ease,
+    transform 0.2s ease,
+    width 0.2s ease;
+
+  &.is-sticky {
+    transform: translateY(0);
+  }
 
   &__intro {
     margin-bottom: 12px;

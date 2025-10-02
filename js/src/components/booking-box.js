@@ -86,4 +86,77 @@ document.addEventListener('DOMContentLoaded', function () {
 
   setMinCheckout();
   recalcSummary();
+
+  // sticky
+
+  let mainWrapperElement = document.querySelector('.main__wrapper');
+  let leftColumnElement = document.querySelector('.main__column--left');
+  let rightColumnElement = document.querySelector('.main__column--right');
+  let bookingBoxElement = document.querySelector('.booking-box');
+  if (!mainWrapperElement || !leftColumnElement || !rightColumnElement || !bookingBoxElement) return;
+
+  let lastStateName = '';
+
+  function isDesktopViewport() {
+    let viewportWidthValue = window.innerWidth || document.documentElement.clientWidth || 0;
+    if (viewportWidthValue >= 992) return true;
+    return false;
+  }
+
+  function computeStickyBounds() {
+    let wrapperTopValue = mainWrapperElement.getBoundingClientRect().top + window.scrollY;
+    let leftTopValue = leftColumnElement.getBoundingClientRect().top + window.scrollY;
+    let rightTopValue = rightColumnElement.getBoundingClientRect().top + window.scrollY;
+    let wrapperBottomValue = wrapperTopValue + mainWrapperElement.offsetHeight;
+    let bookingHeightValue = bookingBoxElement.offsetHeight;
+    let startValue = leftTopValue;
+    let endValue = wrapperBottomValue - bookingHeightValue - 45;
+    return { startValue, endValue, rightTopValue };
+  }
+
+  function setAbsoluteTop(topPixelsValue) {
+    bookingBoxElement.style.position = 'absolute';
+    bookingBoxElement.style.left = '';
+    bookingBoxElement.style.top = String(topPixelsValue) + 'px';
+    bookingBoxElement.style.width = '';
+    bookingBoxElement.classList.remove('is-sticky');
+    lastStateName = 'absolute';
+  }
+
+  function setFixedSticky() {
+    let rightRect = rightColumnElement.getBoundingClientRect();
+    let leftPixelsValue = rightRect.left + window.scrollX + 15;
+    let widthPixelsValue = rightColumnElement.clientWidth - 30;
+    if (widthPixelsValue <= 0) widthPixelsValue = rightColumnElement.clientWidth;
+    bookingBoxElement.style.position = 'fixed';
+    bookingBoxElement.style.left = String(leftPixelsValue) + 'px';
+    bookingBoxElement.style.top = '45px';
+    bookingBoxElement.style.width = String(widthPixelsValue) + 'px';
+    bookingBoxElement.classList.add('is-sticky');
+    lastStateName = 'fixed';
+  }
+
+  function updateStickyPosition() {
+    if (!isDesktopViewport()) {
+      setAbsoluteTop(30);
+      return;
+    }
+    let bounds = computeStickyBounds();
+    let scrollTopValue = window.scrollY;
+    if (scrollTopValue < bounds.startValue) {
+      setAbsoluteTop(30);
+      return;
+    }
+    if (scrollTopValue >= bounds.startValue && scrollTopValue <= bounds.endValue) {
+      if (lastStateName !== 'fixed') setFixedSticky();
+      return;
+    }
+    let topInsideRightColumnValue = bounds.endValue - bounds.rightTopValue;
+    if (topInsideRightColumnValue < 0) topInsideRightColumnValue = 0;
+    setAbsoluteTop(topInsideRightColumnValue);
+  }
+
+  window.addEventListener('scroll', updateStickyPosition, { passive: true });
+  window.addEventListener('resize', updateStickyPosition);
+  updateStickyPosition();
 });
