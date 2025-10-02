@@ -3,12 +3,8 @@
   width: 100%;
   margin: 70px 0 0;
 
-  &--homepage {
-    margin: 0;
-  }
-
   &__wrapper {
-    padding: 90px 0 80px;
+    padding: 30px 0;
   }
 
   &__logo {
@@ -25,7 +21,7 @@
   &__email {
     display: block;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     color: $theme-color2;
   }
 
@@ -36,15 +32,15 @@
   &__address {
     span {
       display: block;
-      font-size: 16px;
+      font-size: 15px;
       color: $theme-color2;
       font-weight: 500;
-      margin: 15px 0 0;
+      margin: 10px 0 0;
     }
 
     p {
       margin: 0;
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 
@@ -56,6 +52,10 @@
 
   &__column {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
 
     h1,
     h2,
@@ -69,6 +69,12 @@
 
     p {
       color: $theme-color2;
+
+      strong {
+        color: $theme-color2;
+        margin: 0 0 -10px;
+        display: block;
+      }
     }
 
     ul {
@@ -76,13 +82,13 @@
       margin: 20px 0 0;
 
       li {
-        margin: 8px 0 0;
+        margin: 0;
         list-style: none;
         color: $theme-color2;
 
         a {
           color: $theme-color2;
-          font-size: 16px;
+          font-size: 15px;
           line-height: 1.5;
           max-width: 200px;
         }

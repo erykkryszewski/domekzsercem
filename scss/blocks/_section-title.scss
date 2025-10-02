@@ -2,33 +2,16 @@
   width: 100%;
   position: relative;
 
-  &--shop {
-    margin: 90px 0 0;
-  }
-
   h2 {
     color: $text-color;
+
+    @extend .h3;
   }
 
   h3 {
     margin: 15px 0 0;
-  }
 
-  p {
-    text-transform: initial;
-    max-width: 850px;
-    text-align: left;
-    font-size: 18px;
-
-    &:first-of-type {
-      margin: 30px 0 0;
-    }
-
-    span {
-      color: $theme-color;
-      font-weight: 600;
-      font-size: 25px;
-    }
+    @extend .h4;
   }
 
   &__wrapper {
@@ -40,23 +23,7 @@
 
       p {
         text-align: center;
-        margin: 25px auto 0 !important;
-      }
-    }
-
-    &--decorated {
-      padding: 0 0 0 30px;
-
-      &::after {
-        content: '';
-        display: block;
-        top: 5px;
-        left: 0;
-        height: calc(100% - 10px);
-        width: 4px;
-        border-radius: $theme-border-radius;
-        background: $theme-color;
-        position: absolute;
+        margin: 15px auto 0 !important;
       }
     }
   }

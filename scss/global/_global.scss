@@ -92,6 +92,10 @@ svg {
     display: flex;
     gap: 0;
     overflow: hidden;
+
+    @media (width <= 991px) {
+      flex-direction: column;
+    }
   }
 
   &__column {

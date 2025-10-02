@@ -1,8 +1,7 @@
 .button {
   border: 1px solid $theme-color3;
-  padding: 13px 25px;
+  padding: 9px 25px;
   font-size: 16px;
-  text-transform: uppercase;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -10,14 +9,15 @@
   background: $theme-color3;
   color: $white;
   transition: all 300ms ease;
-  border-radius: $theme-border-radius !important;
+  border-radius: 6px !important;
   white-space: nowrap;
   flex-shrink: 0;
-  text-align: center;
   min-width: 120px;
   line-height: 1 !important;
   position: relative;
   overflow: hidden;
+  text-align: center;
+  justify-content: center;
 
   &:hover {
     color: $white;

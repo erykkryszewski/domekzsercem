@@ -20,17 +20,17 @@ $footer_third_column_content = get_field("footer_third_column_content", "options
                 <div class="footer__wrapper">
                     <div class="row">
                         <?php if (!empty($footer_second_column_content)): ?>
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-3">
                             <div class="footer__column"><?php echo apply_filters('the_title', $footer_second_column_content); ?></div>
                         </div>
                         <?php endif; ?> <?php if (!empty($footer_third_column_content)): ?>
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-3">
                             <div class="footer__column"><?php echo apply_filters('the_title', $footer_third_column_content); ?></div>
                         </div>
                         <?php endif; ?>
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-4 offset-lg-2">
                             <div class="footer__column">
-                                <h4>Kontakt</h4>
+                                <p><strong>Kontakt</strong></p>
                                 <p>Oskar Luberda</p>
                                 <?php if (!empty($global_phone_number)): ?>
                                 <a href="tel:<?php echo esc_html($global_phone_number,); ?>" class="footer__phone ercodingtheme-phone-number">Tel: <?php echo esc_html($global_phone_number); ?></a>
@@ -50,12 +50,9 @@ $footer_third_column_content = get_field("footer_third_column_content", "options
             <div class="bottom-bar">
                 <div class="container">
                     <div class="bottom-bar__wrapper">
+                        <p><?php _e('Copyright', 'ercodingtheme'); ?> © <?php echo date('Y'); ?>&nbsp;<?php _e('Domek z Sercem', 'ercodingtheme',); ?></p>
                         <p>
-                            <?php _e('Copyright', 'ercodingtheme'); ?>
-                            © <?php echo date('Y'); ?>&nbsp;<?php _e('Domek z Sercem', 'ercodingtheme',); ?>
-                        </p>
-                        <p>
-                            Strona stworzona przez
+                            Realizacja:
                             <a href="https://realmarketing.pl/" target="_blank">Real Marketing</a>
                         </p>
                     </div>

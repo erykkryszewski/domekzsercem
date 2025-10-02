@@ -13,13 +13,26 @@ $icons = get_field("icons");
         <div class="small-icons__wrapper">
             <?php foreach ($icons as $key => $item): ?>
             <div class="small-icons__item">
-                <?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => '']); echo esc_html($item['text']); ?>
+                <div class="small-icons__icon"><?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => '']); ?></div>
+                <div><?php echo esc_html($item['text']); ?></div>
             </div>
             <div class="small-icons__item">
-                <?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => '']); echo esc_html($item['text']); ?>
+                <div class="small-icons__icon">
+                    <?php echo wp_get_attachment_image($item['image'], 'large', '', [ 'class' => '', ]); ?>
+                </div>
+                <div><?php echo esc_html($item['text']); ?></div>
             </div>
             <div class="small-icons__item">
-                <?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => '']); echo esc_html($item['text']); ?>
+                <div class="small-icons__icon">
+                    <?php echo wp_get_attachment_image($item['image'], 'large', '', [ 'class' => '', ]); ?>
+                </div>
+                <div><?php echo esc_html($item['text']); ?></div>
+            </div>
+            <div class="small-icons__item">
+                <div class="small-icons__icon">
+                    <?php echo wp_get_attachment_image($item['image'], 'large', '', [ 'class' => '', ]); ?>
+                </div>
+                <div><?php echo esc_html($item['text']); ?></div>
             </div>
             <?php endforeach; ?>
         </div>

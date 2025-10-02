@@ -55,7 +55,7 @@
     }
 
     &--right {
-      max-height: 244px;
+      max-height: 243px;
 
       @media (width <= 991px) {
         height: auto;
@@ -98,6 +98,7 @@
 
     img {
       border-radius: 15px;
+      filter: brightness(0.97) contrast(1.03);
     }
   }
 

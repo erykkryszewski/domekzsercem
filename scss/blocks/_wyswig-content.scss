@@ -9,8 +9,12 @@
   &__wrapper {
     width: 100%;
 
-    h1, h2, h3, h4, h5 {
-      margin-bottom: 25px;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      margin-bottom: 15px;
 
       em {
         font-size: inherit;
@@ -23,9 +27,10 @@
       }
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin: 20px 0 0;
-      
+
       li {
         @extend .paragraph;
         margin: 0;
@@ -58,6 +63,7 @@
 
     ol {
       counter-reset: li-counter;
+
       li {
         counter-increment: li-counter;
 
@@ -68,7 +74,7 @@
     }
 
     p {
-      margin-bottom: 15px;
+      margin: 15px 0;
 
       em {
         font-size: inherit;

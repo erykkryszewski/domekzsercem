@@ -15,10 +15,10 @@
     box-shadow: 0 0 19px -10px rgba($dark, 0.7);
     background: $white;
     min-height: 70px;
-    top: -45px;
+    top: 0;
 
     @media (width <= 991px) {
-      top: -75px;
+      top: 0;
     }
   }
 
@@ -33,10 +33,10 @@
 
 body.admin-bar {
   .header {
-    top: 32px;
+    top: 0;
 
     &--fixed {
-      top: -13px;
+      top: 0;
     }
   }
 }

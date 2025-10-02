@@ -9,4 +9,10 @@
   &--centered {
     text-align: center;
   }
+
+  &__button {
+    @media (width >= 1200px) {
+      min-width: 350px;
+    }
+  }
 }

@@ -1,4 +1,27 @@
-.small-icons{
-	position:relative;
-	width:100%;
+.small-icons {
+  position: relative;
+  width: 100%;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 0 0;
+  }
+
+  &__item {
+    width: calc(33% - 10px);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    @media (width <= 767px) {
+      width: calc(50% - 7.5px);
+    }
+  }
+
+  &__icon {
+    max-width: 50px;
+  }
 }
