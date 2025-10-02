@@ -31,9 +31,7 @@ $body_classes = get_body_class();
 
     <body <?php if (!is_front_page()) { body_class('theme-subpage'); } else { body_class('theme-frontpage'); } ?>>
         <div class="preloader">
-            <div class="preloader__logo">
-                <?php if (!empty($theme_sign)) { echo wp_get_attachment_image($theme_sign, 'full', '', ['class' => '']); } else { echo ''; } ?>
-            </div>
+            <div class="preloader__logo"><?php if (!empty($theme_sign)) { echo wp_get_attachment_image($theme_sign, 'full', '', ['class' => '']); } else { echo ''; } ?></div>
         </div>
         <header class="header <?php if (!is_front_page()) { echo 'header--subpage'; } ?>">
             <div class="container">
@@ -43,17 +41,16 @@ $body_classes = get_body_class();
                     </a>
                     <div class="nav__content <?php if (!is_front_page()) { echo 'nav__content--subpage'; } ?>">
                         <?php $menu_class = is_front_page() ? 'nav__menu' : 'nav__menu nav__menu--subpage'; echo wp_nav_menu([ 'theme_location' => 'Navigation', 'container' => 'ul', 'menu_class' => $menu_class, ]); ?> <?php if (!empty($global_social_media)): ?>
-                        <ul class="social-media header__social-media <?php if (!is_front_page()) { echo 'header__social-media--subpage'; } ?>">
+                        <ul class="social-media nav__social-media <?php if (!is_front_page()) { echo 'nav__social-media--subpage'; } ?>">
                             <?php foreach ($global_social_media as $key => $item): ?>
                             <li>
-                                <a href="<?php echo esc_url_raw($item['link']); ?>" target="_blank">
-                                    <?php if (!empty($item['icon'])) { echo wp_get_attachment_image($item['icon'], 'large', '', ['class' => '']); } ?>
-                                </a>
+                                <a href="<?php echo esc_url_raw($item['link']); ?>" target="_blank"><?php if (!empty($item['icon'])) { echo wp_get_attachment_image($item['icon'], 'large', '', ['class' => '']); } ?></a>
                             </li>
                             <?php endforeach; ?>
                         </ul>
-                        <?php endif; ?>
-
+                        <?php endif; ?> <?php if(!empty($header_button)):?>
+                        <a href="<?php echo esc_html($header_button['url']);?>" class="nav__button button mobile-only"><?php echo esc_html($header_button['title']);?></a>
+                        <?php endif;?>
                         <div class="hamburger nav__hamburger <?php if (!is_front_page()) { echo 'nav__hamburger--subpage'; } ?>">
                             <span></span>
                             <span></span>
