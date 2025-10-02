@@ -41,22 +41,24 @@ Text Domain: ercodingtheme
 @import 'scss/components/pagination';
 @import 'scss/components/popup';
 @import 'scss/components/booking-box';
+@import 'scss/components/slick-arrows';
 
 /* @blocks:start */
-@import "scss/blocks/contact";
-@import "scss/blocks/text-with-image";
-@import "scss/blocks/border-divider";
-@import "scss/blocks/icons";
-@import "scss/blocks/gallery";
-@import "scss/blocks/section-title";
-@import "scss/blocks/wyswig-content";
-@import "scss/blocks/blank-button";
-@import "scss/blocks/four-boxes-hero";
-@import "scss/blocks/small-icons";
-@import "scss/blocks/two-columns-icons";
-@import "scss/blocks/two-box-promo";
-@import "scss/blocks/static-gallery";
-@import "scss/blocks/booking-form";
+@import 'scss/blocks/contact';
+@import 'scss/blocks/text-with-image';
+@import 'scss/blocks/border-divider';
+@import 'scss/blocks/icons';
+@import 'scss/blocks/gallery';
+@import 'scss/blocks/section-title';
+@import 'scss/blocks/wyswig-content';
+@import 'scss/blocks/blank-button';
+@import 'scss/blocks/four-boxes-hero';
+@import 'scss/blocks/small-icons';
+@import 'scss/blocks/two-columns-icons';
+@import 'scss/blocks/two-box-promo';
+@import 'scss/blocks/static-gallery';
+@import 'scss/blocks/booking-form';
+
 /* @blocks:end */
 
 @import 'scss/sections/header';
@@ -65,4 +67,3 @@ Text Domain: ercodingtheme
 @import 'scss/sections/blog';
 @import 'scss/sections/single';
 @import 'scss/sections/rules-pages';
-

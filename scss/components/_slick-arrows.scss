@@ -1,0 +1,24 @@
+.slick-arrow {
+  position: absolute;
+  bottom: 50%;
+  width: 47px;
+  height: 47px;
+  z-index: 1;
+  background: red;
+  border-radius: 50%;
+  border: 1px solid $white;
+  background-color: rgba($gray, 0.6);
+  background-image: url('./images/left-arrow.png');
+  background-size: 25px 25px;
+  background-position: 7px;
+  background-repeat: no-repeat;
+
+  &.slick-prev {
+    left: 10px;
+  }
+
+  &.slick-next {
+    right: 10px;
+    transform: rotate(180deg);
+  }
+}

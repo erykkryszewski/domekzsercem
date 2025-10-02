@@ -4,7 +4,7 @@
   overflow: hidden;
   position: relative;
 
-  @media (max-width: 767px) {
+  @media (width <= 767px) {
     padding: 0 15px;
   }
 
@@ -16,17 +16,17 @@
     width: 100%;
 
     .slick-slide {
-      margin: 0 15px;
+      margin: 0 7.5px;
 
-      @media (max-width: 767px) {
+      @media (width <= 767px) {
         margin: 0 7.5px;
       }
     }
 
     .slick-list {
-      margin: 0 -15px;
+      margin: 0 -7.5px;
 
-      @media (max-width: 767px) {
+      @media (width <= 767px) {
         margin: 0 -7.5px;
       }
     }
@@ -35,25 +35,33 @@
   &__image {
     width: 100%;
     height: 280px;
-    margin: -6px 0 0;
+    margin: 0;
     padding: 0;
     overflow: hidden;
-    background: $black;
+    border-radius: 15px;
 
     &--full-width {
       height: 400px;
     }
 
-    @media (max-width: 1599px) {
-      height: 330px;
+    @media (width <= 1599px) {
+      height: 281px;
     }
 
-    @media (max-width: 1199px) {
+    @media (width <= 1199px) {
       height: 250px;
     }
 
-    @media (max-width: 767px) {
-      height: 200px;
+    @media (width <= 767px) {
+      height: 180px;
+    }
+
+    @media (width <= 450px) {
+      height: 150px;
+    }
+
+    img {
+      border-radius: 15px;
     }
   }
 }

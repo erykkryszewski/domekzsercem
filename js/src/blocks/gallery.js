@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if ($slider.length && typeof $slider.slick === 'function') {
       $slider.slick({
-        dots: false,
-        arrows: false,
+        dots: true,
+        arrows: true,
         infinite: false,
         speed: 550,
         slidesToShow: 2,
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
           {
             breakpoint: 700,
             settings: {
-              slidesToShow: 1,
+              slidesToShow: 2,
             },
           },
         ],
