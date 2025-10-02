@@ -8,27 +8,39 @@ $left_column_icons = get_field("left_column_icons");
 $right_column_icons = get_field("right_column_icons");
 ?>
 
-<div class="small-icons">
+<div class="two-columns-icons">
     <?php if (!empty($section_id)): ?>
     <div class="section-id" id="<?php echo esc_html($section_id); ?>"></div>
     <?php endif; ?>
     <div class="container">
-        <div class="small-icons__wrapper">
+        <div class="two-columns-icons__wrapper">
             <div class="row">
                 <?php if (!empty($left_column_icons)): ?>
                 <div class="col-md-6">
-                    <div class="small-icons__content">
+                    <div class="two-columns-icons__content two-columns-icons__content--left">
+                        <h3><?php echo esc_html($left_column_title); ?></h3>
                         <?php foreach ($left_column_icons as $key => $item): ?>
-                        <div class="small-icons__item"><?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => '']); ?> <?php echo apply_filters('the_title', $left_column_title); ?></div>
+                        <div class="two-columns-icons__item">
+                            <?php if (!empty($item['image'])): ?>
+                            <div class="two-columns-icons__image">
+                                <?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => ''],); ?>
+                            </div>
+                            <?php endif; ?> <?php echo apply_filters('acf_the_content', $item['text']); ?>
+                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
                 <?php endif; ?> <?php if (!empty($right_column_icons)): ?>
                 <div class="col-md-6">
-                    <div class="small-icons__content">
+                    <div class="two-columns-icons__content two-columns-icons__content--right">
+                        <h3><?php echo esc_html($right_column_title); ?></h3>
                         <?php foreach ($right_column_icons as $key => $item): ?>
-                        <div class="small-icons__item">
-                            <?php echo wp_get_attachment_image($item['image'], 'large', '', [ 'class' => '', ]); ?> <?php echo apply_filters('the_title', $right_column_title); ?>
+                        <div class="two-columns-icons__item">
+                            <?php if (!empty($item['image'])): ?>
+                            <div class="two-columns-icons__image">
+                                <?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => ''],); ?>
+                            </div>
+                            <?php endif; ?> <?php echo apply_filters('acf_the_content', $item['text']); ?>
                         </div>
                         <?php endforeach; ?>
                     </div>

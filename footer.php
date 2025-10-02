@@ -50,7 +50,10 @@ $footer_third_column_content = get_field("footer_third_column_content", "options
             <div class="bottom-bar">
                 <div class="container">
                     <div class="bottom-bar__wrapper">
-                        <p><?php _e('Copyright', 'ercodingtheme'); ?> © <?php echo date('Y'); ?>&nbsp;<?php _e('Domek z Sercem', 'ercodingtheme',); ?></p>
+                        <p>
+                            <?php _e('Copyright', 'ercodingtheme'); ?>
+                            © <?php echo date('Y'); ?>&nbsp;<?php _e('Domek z Sercem', 'ercodingtheme',); ?>
+                        </p>
                         <p>
                             Realizacja:
                             <a href="https://realmarketing.pl/" target="_blank">Real Marketing</a>

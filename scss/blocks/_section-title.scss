@@ -17,6 +17,7 @@
   &__wrapper {
     width: 100%;
     position: relative;
+    max-width: 900px;
 
     &--centered {
       text-align: center;
@@ -33,6 +34,12 @@
 
     h2 {
       color: $text-color;
+    }
+  }
+
+  &:first-child {
+    h2 {
+      @extend .h2;
     }
   }
 }

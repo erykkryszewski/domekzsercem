@@ -81,13 +81,9 @@ svg {
 .main {
   width: 100%;
 
-  &--subpage {
-    padding: 90px 0 0;
-  }
-
   &__wrapper {
     width: 100%;
-    max-width: 1290px;
+    max-width: 1320px;
     margin: 0 auto;
     display: flex;
     gap: 0;
@@ -102,13 +98,30 @@ svg {
     width: 100%;
 
     &--left {
-      max-width: 900px;
+      max-width: 930px;
     }
 
     &--right {
       max-width: 390px;
       padding: 30px 15px;
       position: relative;
+      margin: 10px 0 0;
+
+      @media (width <= 991px) {
+        display: none;
+      }
+    }
+  }
+
+  &--subpage {
+    padding: 130px 0 0 !important;
+
+    @media (width <= 767px) {
+      padding: 100px 0 0 !important;
+    }
+
+    .main__column--right {
+      margin: 20px 0 0;
     }
   }
 }
