@@ -1,4 +1,155 @@
-.booking-form{
-	position:relative;
-	width:100%;
+.payment {
+  width: 100%;
+  position: relative;
+
+  &__form {
+    h2 {
+      display: none;
+    }
+
+    .wpbs-main-wrapper {
+      form.wpbs-form-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+
+        .wpbs-form-field.wpbs-form-submit-button {
+          button {
+            border: 1px solid $theme-color3 !important;
+            padding: 9px 25px !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            background: $theme-color3 !important;
+            color: $white !important;
+            transition: all 300ms ease !important;
+            border-radius: 6px !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+            min-width: 120px !important;
+            line-height: 1 !important;
+            position: relative !important;
+            overflow: hidden !important;
+            text-align: center !important;
+            justify-content: center !important;
+
+            &:hover {
+              color: $white !important;
+              border: 1px solid $theme-color3 !important;
+              background: $theme-color3 !important;
+
+              &::before {
+                content: '' !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: -100% !important;
+                height: 100% !important;
+                width: 100% !important;
+                background: linear-gradient(120deg, transparent, rgb(255 255 255 / 40%), transparent) !important;
+                transition: none !important;
+                animation: mmpuu 1s forwards !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .wpbs-form-fields {
+      display: flex;
+      gap: 30px;
+      width: 100%;
+
+      .wpbs-form-field {
+        label,
+        label span,
+        .wpbs-form-field-label,
+        .wpbs-form-field-label span {
+          font-weight: 600 !important;
+        }
+
+        input[type='text'],
+        input[type='number'],
+        input[type='email'],
+        input[type='password'],
+        input[type='tel'],
+        textarea {
+          @extend .inputs;
+        }
+
+        select {
+          border: 1px solid $light-gray !important;
+          font-size: 14px !important;
+          color: $input-color !important;
+          display: block;
+          border-radius: 8px !important;
+          font-weight: 400 !important;
+          width: 100%;
+        }
+      }
+    }
+
+    .wpbs-main-wrapper {
+      .payment__column--right {
+        .wpbs-form-field:not(.wpbs-form-field-hidden) {
+          padding-bottom: 20px !important;
+        }
+
+        .wpbs-form-field {
+          .wpbs-form-field-input {
+            .wpbs-payment-method-description.wpbs-payment-method-description-stripe.wpbs-payment-method-description-open {
+              padding: 0 !important;
+              background: transparent !important;
+              font-size: 14px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__column {
+    width: 100%;
+
+    &--right {
+      width: 100%;
+      background: $very-light-gray;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  }
+
+  .wpbs-calendars-wrapper.wpbs-legend-position-side {
+    max-width: 100% !important;
+    margin: 0 0 20px;
+
+    .wpbs-calendar {
+      width: 100% !important;
+      max-width: 600px !important;
+      border-radius: 10px;
+    }
+
+    .wpbs-calendar-header {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .wpbs-legend {
+      border-radius: 10px;
+    }
+
+    .wpbs-date,
+    .wpbs-legend-item-icon-color {
+      border-radius: 5px;
+    }
+
+    select {
+      border-radius: 5px !important;
+    }
+  }
+}
+
+.page-id-4720 main .container {
+  max-width: 800px;
 }
