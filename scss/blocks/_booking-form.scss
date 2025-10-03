@@ -168,6 +168,10 @@
       border-radius: 5px;
     }
 
+    .wpbs-date:not(.wpbs-is-bookable) {
+      filter: grayscale(1);
+    }
+
     select {
       border-radius: 5px !important;
     }

@@ -87,6 +87,7 @@ import './blocks/booking-form';
 import './sections/header';
 import './sections/navigation';
 import './sections/main';
+import './sections/payment';
 
 import './components/spacer';
 import './components/popup';
@@ -94,4 +95,3 @@ import './components/animated-number';
 import './components/form';
 import './components/phone-number';
 import './components/booking-box';
-
