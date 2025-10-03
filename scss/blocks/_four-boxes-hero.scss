@@ -68,6 +68,10 @@
         content: 'Więcej zdjęć (+21)';
       }
     }
+
+    &:hover {
+      filter: brightness(0.93);
+    }
   }
 
   &__gallery-info {

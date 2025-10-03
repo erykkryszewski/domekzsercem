@@ -18,6 +18,10 @@
     transform: translateY(0);
   }
 
+  @media (width <= 1280px) {
+    max-width: 310px;
+  }
+
   &__intro {
     margin-bottom: 12px;
     background: #fff;

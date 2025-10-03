@@ -5,6 +5,10 @@
     width: 100%;
     display: flex;
     gap: 30px;
+
+    @media (width <= 767px) {
+      flex-direction: column;
+    }
   }
 
   &__image {

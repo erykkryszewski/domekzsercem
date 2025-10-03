@@ -78,6 +78,10 @@ p,
   margin: 15px 0 0;
   color: $text-color;
 
+  @media (width <= 767px) {
+    font-size: 16px;
+  }
+
   > a {
     font-weight: 500;
     font-size: 17px;
@@ -85,6 +89,10 @@ p,
     text-decoration: underline;
     display: inline-block;
     color: $text-color;
+
+    @media (width <= 767px) {
+      font-size: 16px;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -97,6 +105,10 @@ p,
     font-size: 17px;
     line-height: 21px;
     color: $text-color;
+
+    @media (width <= 767px) {
+      font-size: 16px;
+    }
   }
 
   > span {
@@ -104,6 +116,10 @@ p,
     line-height: 21px;
     font-weight: 400;
     color: $text-color;
+
+    @media (width <= 767px) {
+      font-size: 16px;
+    }
   }
 }
 
@@ -115,11 +131,19 @@ ol.wp-block-list li {
   line-height: 21px;
   font-weight: 400;
 
+  @media (width <= 767px) {
+    font-size: 16px;
+  }
+
   > strong {
     font-weight: 600;
     font-size: 17px;
     line-height: 21px;
     color: $text-color;
+
+    @media (width <= 767px) {
+      font-size: 16px;
+    }
   }
 
   > span {
@@ -127,5 +151,9 @@ ol.wp-block-list li {
     line-height: 21px;
     font-weight: 400;
     color: $text-color;
+
+    @media (width <= 767px) {
+      font-size: 16px;
+    }
   }
 }

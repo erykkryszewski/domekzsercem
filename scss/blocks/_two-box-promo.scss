@@ -2,11 +2,19 @@
   position: relative;
   width: 100%;
 
+  @media (width <= 767px) {
+    margin: -20px 0 0;
+  }
+
   &__wrapper {
     display: flex;
     width: 100%;
     border-radius: 15px;
     margin: 65px 0 0;
+
+    @media (width <= 991px) {
+      flex-direction: column;
+    }
   }
 
   &__column {
@@ -17,12 +25,23 @@
       background: $very-light-gray;
       border-top-left-radius: 15px;
       border-bottom-left-radius: 15px;
+
+      @media (width <= 991px) {
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 0;
+      }
     }
 
     &--right {
       background: $theme-color2;
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
+
+      @media (width <= 991px) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
     }
 
     h1,
@@ -83,5 +102,81 @@
         }
       }
     }
+  }
+
+  &__item {
+    display: flex;
+    gap: 30px;
+    margin: 15px 0 0;
+
+    &:first-child {
+      margin: 0;
+
+      .two-box-promo__days,
+      .two-box-promo__discount {
+        &::before {
+          display: block !important;
+        }
+      }
+    }
+  }
+
+  &__info {
+    padding: 0 0 15px;
+    border-bottom: 1px solid $border-color;
+    margin: 0 0 20px;
+  }
+
+  &__days,
+  &__discount {
+    width: 100%;
+
+    &::before {
+      @extend .h4;
+      display: none;
+      margin: 0 0 10px;
+    }
+  }
+
+  &__days {
+    max-width: 240px;
+    position: relative;
+
+    &::before {
+      content: 'Długość pobytu:';
+    }
+  }
+
+  &__discount {
+    position: relative;
+
+    &::before {
+      content: 'Wysokość rabatu:';
+    }
+  }
+
+  &__cta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (width <= 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__encourage-text {
+    width: 100%;
+    max-width: 381px;
+
+    @media (width <= 767px) {
+      max-width: 100%;
+    }
+  }
+
+  &__button {
+    max-width: 165px;
   }
 }

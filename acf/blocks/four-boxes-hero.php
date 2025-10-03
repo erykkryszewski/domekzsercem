@@ -41,6 +41,7 @@ $right_down_box_image = get_field("right_down_box_image");
             <?php endif; ?> <?php if (!empty($mid_box_image)): ?>
             <div class="four-boxes-hero__column four-boxes-hero__column--mid">
                 <div class="four-boxes-hero__box four-boxes-hero__box--mid">
+                    <a href="/zarezerwuj/" class="cover"></a>
                     <div class="four-boxes-hero__image"><?php echo wp_get_attachment_image($mid_box_image, 'large', '', [ 'class' => 'object-fit-cover', ]); ?></div>
                     <h2 class="four-boxes-hero__subtitle"><?php echo esc_html($mid_box_title); ?></h2>
                 </div>
@@ -49,6 +50,7 @@ $right_down_box_image = get_field("right_down_box_image");
             <div class="four-boxes-hero__column four-boxes-hero__column--right">
                 <?php if (!empty($left_box_image)): ?>
                 <div class="four-boxes-hero__box four-boxes-hero__box--right four-boxes-hero__box--right-up">
+                    <a href="/zarezerwuj/" class="cover"></a>
                     <div class="four-boxes-hero__image"><?php echo wp_get_attachment_image($right_up_box_image, 'large', '', [ 'class' => 'object-fit-cover', ]); ?></div>
                     <h2 class="four-boxes-hero__subtitle"><?php echo esc_html($right_up_box_text); ?></h2>
                 </div>
