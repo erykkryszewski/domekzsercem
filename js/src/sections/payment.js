@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loaderElement.className = 'ercoding-loader';
     const textElement = document.createElement('div');
     textElement.className = 'ercoding-text';
-    textElement.textContent = 'Sprawdzamy dostępność';
+    textElement.textContent = 'Sprawdzanie dostępności i obliczanie kwoty';
     boxElement.appendChild(loaderElement);
     boxElement.appendChild(textElement);
     overlayElement.appendChild(boxElement);
