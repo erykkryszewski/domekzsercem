@@ -1,10 +1,6 @@
 .theme-blog {
   width: 100%;
-  margin: -40px 0 0;
-
-  @media (max-width: 767px) {
-    margin: -30px 0 0;
-  }
+  margin: 10px 0 0;
 
   &--background {
     background: $very-light-gray;
@@ -19,38 +15,15 @@
     position: relative;
   }
 
-  &__decorator {
-    position: absolute;
-    z-index: -1;
-    @extend .h1;
-    color: $text-color;
-    opacity: 0.07;
-    top: -140px;
-    left: -126px;
-    font-size: 180px;
-
-    @media (max-width: 1199px) {
-      font-size: 80px;
-      left: 0px;
-      top: -100px;
-    }
-
-    @media (max-width: 767px) {
-      font-size: 60px;
-      left: 0px;
-      top: -60px;
-    }
-  }
-
   &__row {
-    @media (max-width: 991px) {
+    @media (width <= 991px) {
       flex-direction: column-reverse;
     }
   }
 
   &__column {
     &:nth-child(3) {
-      @media (max-width: 991px) {
+      @media (width <= 991px) {
         display: none;
       }
     }
@@ -60,19 +33,35 @@
     width: 100%;
     height: 100%;
     margin: 40px 0 0;
+    display: flex;
+    gap: 30px;
 
-    @media (max-width: 767px) {
+    @media (width <= 767px) {
       margin: 40px auto 0;
       height: auto;
+      flex-direction: column;
+      gap: 15px;
     }
   }
 
   &__image {
-    height: 220px;
+    height: 211px;
     width: 100%;
+    max-width: 317px;
     position: relative;
     overflow: hidden;
-    border-radius: $theme-border-radius;
+    border-radius: 20px;
+    min-width: 200px;
+
+    @media (width <= 767px) {
+      max-width: 100%;
+      height: 300px;
+    }
+
+    @media (width <= 480px) {
+      max-width: 100%;
+      height: 220px;
+    }
 
     &--bigger {
       height: 350px;
@@ -85,11 +74,7 @@
     &::before {
       display: block;
       position: absolute;
-      bottom: 0;
-      right: 0;
-      top: 0;
-      left: 0;
-      z-index: 1;
+      inset: 0;
       margin: 0;
       background: $black;
       opacity: 0;
@@ -118,15 +103,16 @@
     justify-content: space-between;
     align-items: flex-start;
     height: calc(100% - 350px);
+    max-width: 500px;
 
-    @media (max-width: 767px) {
+    @media (width <= 767px) {
       height: auto;
     }
   }
 
   &__title {
     @extend .h3;
-    margin: 20px 0 0;
+    margin: 10px 0 0;
     max-width: 410px;
 
     &:hover {
@@ -140,12 +126,28 @@
     margin: 15px 0 -10px;
   }
 
+  &__button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    @media (width <= 767px) {
+      justify-content: flex-start;
+    }
+  }
+
   &__button {
-    margin: 15px 0 0;
+    margin: 20px 0 0;
     font-size: 16px;
-    text-transform: uppercase;
-    font-weight: 600;
     position: relative;
+    background: $text-color;
+    border: 1px solid $text-color;
+    font-weight: 400;
+
+    &:hover {
+      background: $text-color;
+      border: 1px solid $text-color;
+    }
 
     &::after {
       content: '';
@@ -168,7 +170,7 @@
   }
 
   p {
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       margin: 16px 0 0;
     }
   }

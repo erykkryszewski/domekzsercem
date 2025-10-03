@@ -2,16 +2,16 @@
   width: 100%;
   position: relative;
 
-  h2 {
+  &__title {
     color: $text-color;
 
-    @extend .h3;
+    @extend .h2;
   }
 
   h3 {
     margin: 15px 0 0;
 
-    @extend .h4;
+    @extend .h3;
   }
 
   &__wrapper {

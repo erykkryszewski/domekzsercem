@@ -12,6 +12,7 @@
   &__image {
     width: calc(50% - 7.5px);
     height: 280px;
+    position: relative;
 
     @media (width <= 767px) {
       height: 180px;

@@ -27,7 +27,7 @@ $query = new WP_Query($args);
     <div class="section-title">
         <div class="container">
             <div class="section-title__wrapper section-title__wrapper--decorated">
-                <h1>Promocje cykliczne i jednorazowe:</h1>
+                <h1 class="section-title__title">Promocje cykliczne i jednorazowe:</h1>
                 <p>
                     Przez cały rok dostępnych jest wiele promocji - od spontanicznych “last minute”, przez coroczne “workation” i inne. Każda z promocji jest starannie opisana i gwarantuje nie tylko niższą cenę ale czasem takżei dodatkowe
                     atrakcje niedostępne w tradycyjnej ofercie. Sprawdź, czy znajeziesz tu cos dla siebie!
@@ -38,25 +38,25 @@ $query = new WP_Query($args);
     <div class="main__wrapper">
         <div class="main__column main__column--left">
             <?php if ($query->have_posts()): ?>
-            <div class="theme-blog theme-blog--courses">
+            <div class="theme-blog theme-blog--promotion">
                 <div class="container">
-                    <div class="theme-blog__wrapper theme-blog__wrapper--courses">
+                    <div class="theme-blog__wrapper theme-blog__wrapper--promotion">
                         <div class="row">
                             <?php while ($query->have_posts()): $query->the_post(); ?>
-                            <div class="col-12 col-md-6 col-lg-4 theme-blog__column theme-blog__column--courses">
-                                <div class="theme-blog__item theme-blog__item--courses">
-                                    <div class="theme-blog__image theme-blog__image--courses">
+                            <div class="col-12 theme-blog__column theme-blog__column--promotion">
+                                <div class="theme-blog__item theme-blog__item--promotion">
+                                    <div class="theme-blog__image theme-blog__image--promotion">
                                         <a href="<?php the_permalink(); ?>" class="cover"></a>
-                                        <?php echo wp_get_attachment_image(get_post_thumbnail_id(), 'full', '', [ 'class' => 'object-fit-contain', ]); ?>
+                                        <?php echo wp_get_attachment_image(get_post_thumbnail_id(), 'full', '', [ 'class' => 'object-fit-cover', ]); ?>
                                     </div>
-                                    <div class="theme-blog__content theme-blog__content--courses">
+                                    <div class="theme-blog__content theme-blog__content--promotion">
                                         <div>
                                             <a href="<?php the_permalink(); ?>" class="theme-blog__title"><?php the_title(); ?></a>
                                             <?php $excerpt = get_the_excerpt(); $content = get_the_content(); if (!empty($excerpt)) { echo ' <p>' . mb_substr($excerpt, 0, 150) . (mb_strlen($excerpt) > 150 ? '...' : '') . '</p> '; } elseif (empty($excerpt) && !empty($content)) { $contentText = strip_tags($content); echo ' <p>' . mb_substr($contentText, 0, 150) . (mb_strlen($contentText) > 150 ? '...' : '') . '</p> '; } ?>
                                         </div>
-                                        <a href="<?php the_permalink(); ?>" class="theme-blog__button button">
-                                            <?php _e('Czytaj więcej', 'ercodingtheme',); ?>
-                                        </a>
+                                        <div class="theme-blog__button-wrapper">
+                                            <a href="<?php the_permalink(); ?>" class="theme-blog__button button"><?php _e('Czytaj więcej', 'ercodingtheme'); ?></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

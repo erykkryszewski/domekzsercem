@@ -12,7 +12,10 @@ $gallery = get_field("gallery");
     <div class="container">
         <div class="static-gallery__wrapper">
             <?php foreach ($gallery as $key => $item): ?> <?php if (!empty($item['image'])): ?>
-            <div class="static-gallery__image"><?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => 'object-fit-cover']); ?></div>
+            <div class="static-gallery__image">
+                <a href="<?php echo esc_url(wp_get_attachment_url($item['image'])); ?>" data-fancybox="gallery" class="cover"></a>
+                <?php echo wp_get_attachment_image($item['image'], 'large', '', ['class' => 'object-fit-cover']); ?>
+            </div>
             <?php endif; ?> <?php endforeach; ?>
         </div>
     </div>
