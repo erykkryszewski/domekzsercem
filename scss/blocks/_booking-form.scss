@@ -53,6 +53,23 @@
             }
           }
         }
+
+        table {
+          *,
+          tr.wpbs-line-item-total td {
+            font-size: 15px !important;
+            border: none !important;
+            background: transparent !important;
+          }
+
+          thead {
+            display: none !important;
+          }
+
+          td {
+            padding: 5px 0 !important;
+          }
+        }
       }
     }
 
@@ -60,6 +77,10 @@
       display: flex;
       gap: 30px;
       width: 100%;
+
+      @media (width <= 767px) {
+        flex-direction: column;
+      }
 
       .wpbs-form-field {
         label,
@@ -102,6 +123,9 @@
               padding: 0 !important;
               background: transparent !important;
               font-size: 14px !important;
+
+              /* temporary */
+              display: none !important;
             }
           }
         }
