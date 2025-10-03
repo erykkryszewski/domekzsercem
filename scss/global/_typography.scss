@@ -61,12 +61,12 @@ h4 > b,
 h4 > span {
   color: $text-color;
   font-family: $font-primary;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.1;
   font-weight: 600;
 
   @media (width <= 1199px) {
-    font-size: 17px;
+    font-size: 18px;
   }
 }
 
