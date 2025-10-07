@@ -22,6 +22,10 @@
     max-width: 310px;
   }
 
+  @media (width <= 1199px) {
+    display: none;
+  }
+
   &__intro {
     margin-bottom: 12px;
     background: #fff;

@@ -22,6 +22,10 @@
       @media (width <= 991px) {
         max-width: calc(50% - 7.5px);
       }
+
+      @media (width <= 767px) {
+        display: none;
+      }
     }
 
     &--right {
@@ -33,6 +37,10 @@
 
       @media (width <= 991px) {
         max-width: calc(50% - 7.5px);
+      }
+
+      @media (width <= 767px) {
+        display: none;
       }
     }
   }
@@ -52,6 +60,12 @@
     @media (width <= 991px) {
       height: auto;
       min-height: 350px;
+    }
+
+    &--left {
+      @media (width <= 767px) {
+        min-height: 450px;
+      }
     }
 
     &--right {
@@ -117,5 +131,11 @@
     color: $white;
     position: relative;
     z-index: 2;
+  }
+
+  &__subtitle {
+    @media (width <= 390px) {
+      font-size: 17px;
+    }
   }
 }

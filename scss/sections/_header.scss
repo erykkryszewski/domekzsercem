@@ -7,6 +7,8 @@
   top: 0;
   transition: all 150ms ease;
   min-height: 91px;
+  overflow: hidden;
+  max-width: 100%;
 
   /* temporary styles */
   background: $white;
@@ -17,7 +19,7 @@
     min-height: 70px;
     top: 0;
 
-    @media (width <= 991px) {
+    @media (width <= 1199px) {
       top: 0;
     }
   }

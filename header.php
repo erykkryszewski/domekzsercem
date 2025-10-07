@@ -60,6 +60,7 @@ $body_classes = get_body_class();
                     </div>
                 </nav>
             </div>
+            <a href="/zarezerwuj/" class="button mobile-only booking-button">Zarezerwuj</a>
         </header>
     
 

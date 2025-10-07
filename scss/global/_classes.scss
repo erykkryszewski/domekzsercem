@@ -83,13 +83,13 @@
 
 /* RWD helping styles */
 .mobile-only {
-  @media (width >= 992px) {
+  @media (width >= 1200px) {
     display: none !important;
   }
 }
 
 .desktop-only {
-  @media (width <= 991px) {
+  @media (width <= 1199px) {
     display: none !important;
   }
 }
