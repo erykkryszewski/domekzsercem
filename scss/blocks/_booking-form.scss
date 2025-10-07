@@ -13,6 +13,10 @@
         padding: 0 !important;
 
         .wpbs-form-field.wpbs-form-submit-button {
+          // position: absolute;
+          // bottom: 0;
+          // left: 410px;
+
           button {
             border: 1px solid $theme-color3 !important;
             padding: 9px 25px !important;
@@ -67,7 +71,7 @@
           }
 
           td {
-            padding: 5px 0 !important;
+            padding: 2px 0 !important;
           }
         }
       }
@@ -117,6 +121,17 @@
           padding-bottom: 20px !important;
         }
 
+        .wpbs-coupon-code {
+          button {
+            &.wpbs-coupon-code-button.wpbs-coupon-code-add {
+              border-top-right-radius: 8px !important;
+              border-bottom-right-radius: 8px !important;
+              font-weight: 600 !important;
+              background: $theme-color3 !important;
+            }
+          }
+        }
+
         .wpbs-form-field {
           .wpbs-form-field-input {
             .wpbs-payment-method-description.wpbs-payment-method-description-stripe.wpbs-payment-method-description-open {
@@ -138,15 +153,20 @@
 
     &--right {
       width: 100%;
-      background: $very-light-gray;
+      background: $theme-color2;
       padding: 20px;
       border-radius: 10px;
+
+      @media (width >= 1200px) {
+        margin: -528px 0 0;
+      }
     }
   }
 
   .wpbs-calendars-wrapper.wpbs-legend-position-side {
-    max-width: 100% !important;
+    max-width: 420px !important;
     margin: 0 0 20px;
+    padding: 0 0 100px !important;
 
     .wpbs-calendar {
       width: 100% !important;
@@ -161,11 +181,21 @@
 
     .wpbs-legend {
       border-radius: 10px;
+      bottom: -20px !important;
+      top: auto !important;
+      left: 0 !important;
+      width: calc(100% + 10px) !important;
     }
 
     .wpbs-date,
     .wpbs-legend-item-icon-color {
       border-radius: 5px;
+      overflow: hidden !important;
+      width: calc(100% - 2px) !important;
+    }
+
+    .wpbs-legend-icon-select svg {
+      max-width: 54px !important;
     }
 
     .wpbs-date:not(.wpbs-is-bookable) {
@@ -178,6 +208,6 @@
   }
 }
 
-.page-id-4720 main .container {
-  max-width: 800px;
+.page-id-4720 .container {
+  max-width: 1100px;
 }

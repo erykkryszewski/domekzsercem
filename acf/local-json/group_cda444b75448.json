@@ -1,0 +1,24 @@
+{
+  "key": "group_274277bfa565",
+  "title": "Block: Testimonials",
+  "fields": [],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/testimonials"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": "",
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "show_in_rest": 0,
+  "modified": 1759875367
+}

@@ -8,11 +8,29 @@ document.addEventListener('DOMContentLoaded', function () {
   const rightColumn = document.createElement('div');
   rightColumn.className = 'payment__column payment__column--right';
 
-  const rightSelectors = ['.payment__discount', '.payment__total', '.payment__options'];
+  const rightSelectors = [
+    '.wpbs-form-field-part-payment-applicability',
+    '.wpbs-form-field-coupon',
+    '.payment__discount',
+    '.payment__total',
+    '.payment__options',
+  ];
+
+  const leftSelectors = ['.calendar-maybe-if-it-will-work'];
 
   Array.from(formFieldsElement.children).forEach(function (child) {
-    if (rightSelectors.some((selector) => child.matches(selector))) {
+    if (
+      rightSelectors.some(function (selector) {
+        return child.matches(selector);
+      })
+    ) {
       rightColumn.appendChild(child);
+    } else if (
+      leftSelectors.some(function (selector) {
+        return child.matches(selector);
+      })
+    ) {
+      leftColumn.prepend(child);
     } else {
       leftColumn.appendChild(child);
     }
@@ -21,7 +39,24 @@ document.addEventListener('DOMContentLoaded', function () {
   formFieldsElement.innerHTML = '';
   formFieldsElement.appendChild(leftColumn);
   formFieldsElement.appendChild(rightColumn);
+
+  let calendarCheckIntervalId = null;
+  function startCalendarCheck() {
+    if (calendarCheckIntervalId) return;
+    calendarCheckIntervalId = setInterval(function () {
+      const calendarElement = document.querySelector('.calendar-maybe-if-it-will-work');
+      if (!calendarElement) return;
+      if (!leftColumn.contains(calendarElement)) {
+        leftColumn.prepend(calendarElement);
+      }
+      clearInterval(calendarCheckIntervalId);
+      calendarCheckIntervalId = null;
+    }, 1000);
+  }
+
+  startCalendarCheck();
 });
+
 (function () {
   'use strict';
 
