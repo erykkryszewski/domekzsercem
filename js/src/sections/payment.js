@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
   formFieldsElement.appendChild(leftColumn);
   formFieldsElement.appendChild(rightColumn);
 
+  const ercodingIntervalMs = 300;
+
   let calendarCheckIntervalId = null;
   function startCalendarCheck() {
     if (calendarCheckIntervalId) return;
@@ -51,10 +53,81 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       clearInterval(calendarCheckIntervalId);
       calendarCheckIntervalId = null;
-    }, 1000);
+    }, ercodingIntervalMs);
   }
 
   startCalendarCheck();
+
+  function ensureSharedDatesSelectedObserver() {
+    if (!window.__ercodingDatesSelectedCallbacks) {
+      window.__ercodingDatesSelectedCallbacks = [];
+    }
+    if (window.__ercodingDatesSelectedObserver) {
+      const targetNow = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (targetNow && targetNow.classList.contains('wpbs-dates-selected')) {
+        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+          try {
+            window.__ercodingDatesSelectedCallbacks[i]();
+          } catch (e) {}
+        }
+      }
+      return;
+    }
+    let lastHadClass = false;
+    const runCallbacksOncePerChange = function (hasClassNow) {
+      if (hasClassNow && !lastHadClass) {
+        lastHadClass = true;
+        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+          try {
+            window.__ercodingDatesSelectedCallbacks[i]();
+          } catch (e) {}
+        }
+      }
+      if (!hasClassNow) {
+        lastHadClass = false;
+      }
+    };
+    const targetElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
+    if (targetElement) {
+      runCallbacksOncePerChange(targetElement.classList.contains('wpbs-dates-selected'));
+    }
+    const obs = new MutationObserver(function () {
+      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (!t) return;
+      const hasClassNow = t.classList.contains('wpbs-dates-selected');
+      runCallbacksOncePerChange(hasClassNow);
+    });
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+      subtree: true,
+      childList: true,
+    });
+    window.__ercodingDatesSelectedObserver = obs;
+  }
+
+  ensureSharedDatesSelectedObserver();
+
+  function toggleRightColumnOnDatesSelected() {
+    const targetElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
+    if (!targetElement) return;
+    const hasClass = targetElement.classList.contains('wpbs-dates-selected');
+    if (hasClass) {
+      if (!rightColumn.classList.contains('payment__column--hide-after')) {
+        rightColumn.classList.add('payment__column--hide-after');
+      }
+    } else {
+      if (rightColumn.classList.contains('payment__column--hide-after')) {
+        rightColumn.classList.remove('payment__column--hide-after');
+      }
+    }
+  }
+
+  if (!window.__ercodingDatesSelectedCallbacks) {
+    window.__ercodingDatesSelectedCallbacks = [];
+  }
+  window.__ercodingDatesSelectedCallbacks.push(toggleRightColumnOnDatesSelected);
+  toggleRightColumnOnDatesSelected();
 });
 
 (function () {
@@ -62,6 +135,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (window.__ercodingWpbsAutoSelectorRunningV2) return;
   window.__ercodingWpbsAutoSelectorRunningV2 = true;
+
+  const ercodingIntervalMs = 300;
 
   let stoppedFlag = false;
   let pendingTimeoutIdsArray = [];
@@ -132,11 +207,73 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pricingTableElement) {
       stoppedFlag = true;
       clearAllTimeouts();
-      hideOverlaySmoothly();
       return true;
     }
     return false;
   }
+
+  function ensureSharedDatesSelectedObserver() {
+    if (!window.__ercodingDatesSelectedCallbacks) {
+      window.__ercodingDatesSelectedCallbacks = [];
+    }
+    if (window.__ercodingDatesSelectedObserver) {
+      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (t && t.classList.contains('wpbs-dates-selected')) {
+        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+          try {
+            window.__ercodingDatesSelectedCallbacks[i]();
+          } catch (e) {}
+        }
+      }
+      return;
+    }
+    let lastHadClass = false;
+    const runCallbacksOncePerChange = function (hasClassNow) {
+      if (hasClassNow && !lastHadClass) {
+        lastHadClass = true;
+        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+          try {
+            window.__ercodingDatesSelectedCallbacks[i]();
+          } catch (e) {}
+        }
+      }
+      if (!hasClassNow) {
+        lastHadClass = false;
+      }
+    };
+    const targetElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
+    if (targetElement) {
+      runCallbacksOncePerChange(targetElement.classList.contains('wpbs-dates-selected'));
+    }
+    const obs = new MutationObserver(function () {
+      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (!t) return;
+      const hasClassNow = t.classList.contains('wpbs-dates-selected');
+      runCallbacksOncePerChange(hasClassNow);
+    });
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+      subtree: true,
+      childList: true,
+    });
+    window.__ercodingDatesSelectedObserver = obs;
+  }
+
+  ensureSharedDatesSelectedObserver();
+
+  function hideOverlayWhenDatesSelected() {
+    const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+    if (!t) return;
+    if (t.classList.contains('wpbs-dates-selected')) {
+      hideOverlaySmoothly();
+    }
+  }
+
+  if (!window.__ercodingDatesSelectedCallbacks) {
+    window.__ercodingDatesSelectedCallbacks = [];
+  }
+  window.__ercodingDatesSelectedCallbacks.push(hideOverlayWhenDatesSelected);
 
   const pricingObserver = new MutationObserver(function () {
     if (stopNow()) pricingObserver.disconnect();
@@ -189,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (stopNow()) return null;
       const root = document.querySelector('.wpbs-container.wpbs-visible');
       if (root && root.querySelector('.wpbs-date')) return root;
-      await sleepMs(120);
+      await sleepMs(ercodingIntervalMs);
     }
     return null;
   }
@@ -336,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (stopNow()) return oldRoot;
       const nowRoot = document.querySelector('.wpbs-container.wpbs-visible');
       if (nowRoot && nowRoot !== oldRoot) return nowRoot;
-      await sleepMs(120);
+      await sleepMs(ercodingIntervalMs);
     }
     return document.querySelector('.wpbs-container.wpbs-visible') || oldRoot;
   }
@@ -350,8 +487,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (opt) {
         sel.value = opt.value;
         fireChange(sel);
-        await sleepMs(900);
-        root = await waitForRerender(root, 4000);
+        await sleepMs(600);
+        root = await waitForRerender(root, 3000);
         if (isTargetMonthShown(root, y, m)) return root;
       }
     }
@@ -378,8 +515,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (goNext && nextBtn) pointerClick(nextBtn);
       if (!goNext && prevBtn) pointerClick(prevBtn);
       guard += 1;
-      await sleepMs(900);
-      root = await waitForRerender(root, 3000);
+      await sleepMs(600);
+      root = await waitForRerender(root, 2500);
     }
     return root;
   }
@@ -447,7 +584,7 @@ document.addEventListener('DOMContentLoaded', function () {
     while (Date.now() - start < maxMs) {
       const el = findExtraPersonsInput();
       if (el) return el;
-      await sleepMs(100);
+      await sleepMs(ercodingIntervalMs);
     }
     return null;
   }
@@ -478,13 +615,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const cell = getCell(root, y, m, d);
     if (!cell) return { ok: false, root: root };
     pointerClick(cell);
-    await sleepMs(900);
-    let newRoot = await waitForRerender(root, 4000);
+    await sleepMs(600);
+    let newRoot = await waitForRerender(root, 3000);
     let confirmed = isFirstSelected(newRoot, y, m, d);
     if (!confirmed) {
       pointerClick(getCell(newRoot, y, m, d));
-      await sleepMs(900);
-      newRoot = await waitForRerender(newRoot, 4000);
+      await sleepMs(600);
+      newRoot = await waitForRerender(newRoot, 3000);
       confirmed = isFirstSelected(newRoot, y, m, d);
     }
     return { ok: confirmed, root: newRoot };
@@ -496,15 +633,15 @@ document.addEventListener('DOMContentLoaded', function () {
     pointerHover(cell);
     await sleepMs(120);
     pointerClick(cell);
-    await sleepMs(900);
-    let newRoot = await waitForRerender(root, 4000);
+    await sleepMs(600);
+    let newRoot = await waitForRerender(root, 3000);
     let confirmed = isLastSelected(newRoot, y, m, d);
     if (!confirmed) {
       pointerHover(getCell(newRoot, y, m, d));
       await sleepMs(120);
       pointerClick(getCell(newRoot, y, m, d));
-      await sleepMs(900);
-      newRoot = await waitForRerender(newRoot, 4000);
+      await sleepMs(600);
+      newRoot = await waitForRerender(newRoot, 3000);
       confirmed = isLastSelected(newRoot, y, m, d);
     }
     return { ok: confirmed, root: newRoot };
@@ -517,7 +654,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     root = await showMonth(root, ci.yearNumber, ci.monthNumber);
     if (stopNow()) return false;
-    await sleepMs(900);
+    await sleepMs(600);
     if (stopNow()) return false;
 
     const checkinResult = await clickAndConfirmCheckin(root, ci.yearNumber, ci.monthNumber, ci.dayNumber);
@@ -540,7 +677,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (co.yearNumber !== ci.yearNumber || co.monthNumber !== ci.monthNumber) {
       root = await showMonth(root, co.yearNumber, co.monthNumber);
       if (stopNow()) return true;
-      await sleepMs(600);
+      await sleepMs(450);
       if (stopNow()) return true;
     }
 
@@ -563,12 +700,20 @@ document.addEventListener('DOMContentLoaded', function () {
       tries += 1;
       await sleepMs(1200);
     }
-    stopNow();
-    if (!stoppedFlag) hideOverlaySmoothly();
+    if (!window.__ercodingDatesSelectedObserver) {
+      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (t && t.classList.contains('wpbs-dates-selected')) {
+        hideOverlaySmoothly();
+      }
+    }
   }
 
   function start() {
     if (stopNow()) return;
+    const paramsObject = new URLSearchParams(window.location.search);
+    const hasCheckin = !!paramsObject.get('checkin');
+    const hasCheckout = !!paramsObject.get('checkout');
+    if (!hasCheckin || !hasCheckout) return;
     mainRun();
   }
 
