@@ -1,6 +1,6 @@
 <?php
 
-$price_per_night = 100;
+$price_per_night = 400;
 $discount_name = 'Rabat workation';
 $discount_amount = 340;
 ?>

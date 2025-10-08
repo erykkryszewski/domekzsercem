@@ -58,13 +58,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   startCalendarCheck();
 
-  function ensureSharedDatesSelectedObserver() {
+  function ensureSharedDatesSelectedObserver(optionsObject) {
+    const minStableMsNumber = optionsObject && optionsObject.minStableMsNumber ? optionsObject.minStableMsNumber : 500;
     if (!window.__ercodingDatesSelectedCallbacks) {
       window.__ercodingDatesSelectedCallbacks = [];
     }
-    if (window.__ercodingDatesSelectedObserver) {
-      const targetNow = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (targetNow && targetNow.classList.contains('wpbs-dates-selected')) {
+    if (
+      window.__ercodingDatesSelectedObserver &&
+      typeof window.__ercodingDatesSelectedObserverDisconnect === 'function'
+    ) {
+      const targetNowElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (targetNowElement && targetNowElement.classList.contains('wpbs-dates-selected')) {
         for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
           try {
             window.__ercodingDatesSelectedCallbacks[i]();
@@ -73,29 +77,49 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       return;
     }
-    let lastHadClass = false;
-    const runCallbacksOncePerChange = function (hasClassNow) {
-      if (hasClassNow && !lastHadClass) {
-        lastHadClass = true;
-        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
-          try {
-            window.__ercodingDatesSelectedCallbacks[i]();
-          } catch (e) {}
+    let lastFiredStableFlag = false;
+    let pendingStableTimerId = null;
+    function clearStableTimer() {
+      if (pendingStableTimerId) {
+        clearTimeout(pendingStableTimerId);
+        pendingStableTimerId = null;
+      }
+    }
+    function scheduleStableFire() {
+      if (pendingStableTimerId) return;
+      pendingStableTimerId = setTimeout(function () {
+        pendingStableTimerId = null;
+        if (isDatesSelectedNow()) {
+          if (!lastFiredStableFlag) {
+            lastFiredStableFlag = true;
+            for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+              try {
+                window.__ercodingDatesSelectedCallbacks[i]();
+              } catch (e) {}
+            }
+          }
         }
-      }
-      if (!hasClassNow) {
-        lastHadClass = false;
-      }
-    };
-    const targetElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
-    if (targetElement) {
-      runCallbacksOncePerChange(targetElement.classList.contains('wpbs-dates-selected'));
+      }, minStableMsNumber);
+    }
+    function resetOnRemoval() {
+      clearStableTimer();
+      lastFiredStableFlag = false;
+    }
+    function isDatesSelectedNow() {
+      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (!t) return false;
+      return t.classList.contains('wpbs-dates-selected');
+    }
+    if (isDatesSelectedNow()) {
+      scheduleStableFire();
     }
     const obs = new MutationObserver(function () {
-      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (!t) return;
-      const hasClassNow = t.classList.contains('wpbs-dates-selected');
-      runCallbacksOncePerChange(hasClassNow);
+      const hasClassNow = isDatesSelectedNow();
+      if (hasClassNow) {
+        scheduleStableFire();
+      } else {
+        resetOnRemoval();
+      }
     });
     obs.observe(document.documentElement, {
       attributes: true,
@@ -104,6 +128,11 @@ document.addEventListener('DOMContentLoaded', function () {
       childList: true,
     });
     window.__ercodingDatesSelectedObserver = obs;
+    window.__ercodingDatesSelectedObserverDisconnect = function () {
+      try {
+        obs.disconnect();
+      } catch (e) {}
+    };
   }
 
   ensureSharedDatesSelectedObserver();
@@ -181,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loaderElement.className = 'ercoding-loader';
     const textElement = document.createElement('div');
     textElement.className = 'ercoding-text';
-    textElement.textContent = 'Sprawdzanie dostępności i obliczanie kwoty';
+    textElement.textContent = 'Sprawdzanie dostępności i obliczanie finalnej kwoty';
     boxElement.appendChild(loaderElement);
     boxElement.appendChild(textElement);
     overlayElement.appendChild(boxElement);
@@ -212,13 +241,17 @@ document.addEventListener('DOMContentLoaded', function () {
     return false;
   }
 
-  function ensureSharedDatesSelectedObserver() {
+  function ensureSharedDatesSelectedObserver(optionsObject) {
+    const minStableMsNumber = optionsObject && optionsObject.minStableMsNumber ? optionsObject.minStableMsNumber : 500;
     if (!window.__ercodingDatesSelectedCallbacks) {
       window.__ercodingDatesSelectedCallbacks = [];
     }
-    if (window.__ercodingDatesSelectedObserver) {
-      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (t && t.classList.contains('wpbs-dates-selected')) {
+    if (
+      window.__ercodingDatesSelectedObserver &&
+      typeof window.__ercodingDatesSelectedObserverDisconnect === 'function'
+    ) {
+      const targetNowElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (targetNowElement && targetNowElement.classList.contains('wpbs-dates-selected')) {
         for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
           try {
             window.__ercodingDatesSelectedCallbacks[i]();
@@ -227,29 +260,49 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       return;
     }
-    let lastHadClass = false;
-    const runCallbacksOncePerChange = function (hasClassNow) {
-      if (hasClassNow && !lastHadClass) {
-        lastHadClass = true;
-        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
-          try {
-            window.__ercodingDatesSelectedCallbacks[i]();
-          } catch (e) {}
+    let lastFiredStableFlag = false;
+    let pendingStableTimerId = null;
+    function clearStableTimer() {
+      if (pendingStableTimerId) {
+        clearTimeout(pendingStableTimerId);
+        pendingStableTimerId = null;
+      }
+    }
+    function scheduleStableFire() {
+      if (pendingStableTimerId) return;
+      pendingStableTimerId = setTimeout(function () {
+        pendingStableTimerId = null;
+        if (isDatesSelectedNow()) {
+          if (!lastFiredStableFlag) {
+            lastFiredStableFlag = true;
+            for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+              try {
+                window.__ercodingDatesSelectedCallbacks[i]();
+              } catch (e) {}
+            }
+          }
         }
-      }
-      if (!hasClassNow) {
-        lastHadClass = false;
-      }
-    };
-    const targetElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
-    if (targetElement) {
-      runCallbacksOncePerChange(targetElement.classList.contains('wpbs-dates-selected'));
+      }, minStableMsNumber);
+    }
+    function resetOnRemoval() {
+      clearStableTimer();
+      lastFiredStableFlag = false;
+    }
+    function isDatesSelectedNow() {
+      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (!t) return false;
+      return t.classList.contains('wpbs-dates-selected');
+    }
+    if (isDatesSelectedNow()) {
+      scheduleStableFire();
     }
     const obs = new MutationObserver(function () {
-      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (!t) return;
-      const hasClassNow = t.classList.contains('wpbs-dates-selected');
-      runCallbacksOncePerChange(hasClassNow);
+      const hasClassNow = isDatesSelectedNow();
+      if (hasClassNow) {
+        scheduleStableFire();
+      } else {
+        resetOnRemoval();
+      }
     });
     obs.observe(document.documentElement, {
       attributes: true,
@@ -258,6 +311,11 @@ document.addEventListener('DOMContentLoaded', function () {
       childList: true,
     });
     window.__ercodingDatesSelectedObserver = obs;
+    window.__ercodingDatesSelectedObserverDisconnect = function () {
+      try {
+        obs.disconnect();
+      } catch (e) {}
+    };
   }
 
   ensureSharedDatesSelectedObserver();
