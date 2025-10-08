@@ -1,3 +1,74 @@
+(function () {
+  if (window.__ercodingDatesSelectedBootstrap) return;
+  window.__ercodingDatesSelectedCallbacks = window.__ercodingDatesSelectedCallbacks || [];
+  window.__ercodingEnsureDatesSelectedObserver = function (optionsObject) {
+    const minStableMsNumber = optionsObject && optionsObject.minStableMsNumber ? optionsObject.minStableMsNumber : 500;
+    if (window.__ercodingDatesSelectedObserver) {
+      const t0 = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (t0 && t0.classList.contains('wpbs-dates-selected')) {
+        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+          try {
+            window.__ercodingDatesSelectedCallbacks[i]();
+          } catch (e) {}
+        }
+      }
+      return;
+    }
+    let lastFiredStableFlag = false;
+    let pendingStableTimerId = null;
+    function clearStableTimer() {
+      if (pendingStableTimerId) {
+        clearTimeout(pendingStableTimerId);
+        pendingStableTimerId = null;
+      }
+    }
+    function isDatesSelectedNow() {
+      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+      if (!t) return false;
+      return t.classList.contains('wpbs-dates-selected');
+    }
+    function scheduleStableFire() {
+      if (pendingStableTimerId) return;
+      pendingStableTimerId = setTimeout(function () {
+        pendingStableTimerId = null;
+        if (isDatesSelectedNow()) {
+          if (!lastFiredStableFlag) {
+            lastFiredStableFlag = true;
+            for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
+              try {
+                window.__ercodingDatesSelectedCallbacks[i]();
+              } catch (e) {}
+            }
+          }
+        }
+      }, minStableMsNumber);
+    }
+    function resetOnRemoval() {
+      clearStableTimer();
+      lastFiredStableFlag = false;
+    }
+    if (isDatesSelectedNow()) {
+      scheduleStableFire();
+    }
+    const obs = new MutationObserver(function () {
+      const hasClassNow = isDatesSelectedNow();
+      if (hasClassNow) {
+        scheduleStableFire();
+      } else {
+        resetOnRemoval();
+      }
+    });
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+      subtree: true,
+      childList: true,
+    });
+    window.__ercodingDatesSelectedObserver = obs;
+  };
+  window.__ercodingDatesSelectedBootstrap = true;
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
   const formFieldsElement = document.querySelector('.wpbs-form-fields');
   if (!formFieldsElement) return;
@@ -58,84 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   startCalendarCheck();
 
-  function ensureSharedDatesSelectedObserver(optionsObject) {
-    const minStableMsNumber = optionsObject && optionsObject.minStableMsNumber ? optionsObject.minStableMsNumber : 500;
-    if (!window.__ercodingDatesSelectedCallbacks) {
-      window.__ercodingDatesSelectedCallbacks = [];
-    }
-    if (
-      window.__ercodingDatesSelectedObserver &&
-      typeof window.__ercodingDatesSelectedObserverDisconnect === 'function'
-    ) {
-      const targetNowElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (targetNowElement && targetNowElement.classList.contains('wpbs-dates-selected')) {
-        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
-          try {
-            window.__ercodingDatesSelectedCallbacks[i]();
-          } catch (e) {}
-        }
-      }
-      return;
-    }
-    let lastFiredStableFlag = false;
-    let pendingStableTimerId = null;
-    function clearStableTimer() {
-      if (pendingStableTimerId) {
-        clearTimeout(pendingStableTimerId);
-        pendingStableTimerId = null;
-      }
-    }
-    function scheduleStableFire() {
-      if (pendingStableTimerId) return;
-      pendingStableTimerId = setTimeout(function () {
-        pendingStableTimerId = null;
-        if (isDatesSelectedNow()) {
-          if (!lastFiredStableFlag) {
-            lastFiredStableFlag = true;
-            for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
-              try {
-                window.__ercodingDatesSelectedCallbacks[i]();
-              } catch (e) {}
-            }
-          }
-        }
-      }, minStableMsNumber);
-    }
-    function resetOnRemoval() {
-      clearStableTimer();
-      lastFiredStableFlag = false;
-    }
-    function isDatesSelectedNow() {
-      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (!t) return false;
-      return t.classList.contains('wpbs-dates-selected');
-    }
-    if (isDatesSelectedNow()) {
-      scheduleStableFire();
-    }
-    const obs = new MutationObserver(function () {
-      const hasClassNow = isDatesSelectedNow();
-      if (hasClassNow) {
-        scheduleStableFire();
-      } else {
-        resetOnRemoval();
-      }
-    });
-    obs.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-      subtree: true,
-      childList: true,
-    });
-    window.__ercodingDatesSelectedObserver = obs;
-    window.__ercodingDatesSelectedObserverDisconnect = function () {
-      try {
-        obs.disconnect();
-      } catch (e) {}
-    };
-  }
-
-  ensureSharedDatesSelectedObserver();
+  window.__ercodingEnsureDatesSelectedObserver({ minStableMsNumber: 500 });
 
   function toggleRightColumnOnDatesSelected() {
     const targetElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
@@ -152,9 +146,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  if (!window.__ercodingDatesSelectedCallbacks) {
-    window.__ercodingDatesSelectedCallbacks = [];
-  }
   window.__ercodingDatesSelectedCallbacks.push(toggleRightColumnOnDatesSelected);
   toggleRightColumnOnDatesSelected();
 });
@@ -241,84 +232,19 @@ document.addEventListener('DOMContentLoaded', function () {
     return false;
   }
 
-  function ensureSharedDatesSelectedObserver(optionsObject) {
-    const minStableMsNumber = optionsObject && optionsObject.minStableMsNumber ? optionsObject.minStableMsNumber : 500;
-    if (!window.__ercodingDatesSelectedCallbacks) {
-      window.__ercodingDatesSelectedCallbacks = [];
-    }
-    if (
-      window.__ercodingDatesSelectedObserver &&
-      typeof window.__ercodingDatesSelectedObserverDisconnect === 'function'
-    ) {
-      const targetNowElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (targetNowElement && targetNowElement.classList.contains('wpbs-dates-selected')) {
-        for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
-          try {
-            window.__ercodingDatesSelectedCallbacks[i]();
-          } catch (e) {}
-        }
-      }
-      return;
-    }
-    let lastFiredStableFlag = false;
-    let pendingStableTimerId = null;
-    function clearStableTimer() {
-      if (pendingStableTimerId) {
-        clearTimeout(pendingStableTimerId);
-        pendingStableTimerId = null;
+  function hideOverlayWhenDatesSelected() {
+    const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
+    if (!t) return;
+    if (t.classList.contains('wpbs-dates-selected')) {
+      const el = document.getElementById('ercoding-wpbs-overlay');
+      if (el) {
+        hideOverlaySmoothly();
       }
     }
-    function scheduleStableFire() {
-      if (pendingStableTimerId) return;
-      pendingStableTimerId = setTimeout(function () {
-        pendingStableTimerId = null;
-        if (isDatesSelectedNow()) {
-          if (!lastFiredStableFlag) {
-            lastFiredStableFlag = true;
-            for (let i = 0; i < window.__ercodingDatesSelectedCallbacks.length; i++) {
-              try {
-                window.__ercodingDatesSelectedCallbacks[i]();
-              } catch (e) {}
-            }
-          }
-        }
-      }, minStableMsNumber);
-    }
-    function resetOnRemoval() {
-      clearStableTimer();
-      lastFiredStableFlag = false;
-    }
-    function isDatesSelectedNow() {
-      const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
-      if (!t) return false;
-      return t.classList.contains('wpbs-dates-selected');
-    }
-    if (isDatesSelectedNow()) {
-      scheduleStableFire();
-    }
-    const obs = new MutationObserver(function () {
-      const hasClassNow = isDatesSelectedNow();
-      if (hasClassNow) {
-        scheduleStableFire();
-      } else {
-        resetOnRemoval();
-      }
-    });
-    obs.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-      subtree: true,
-      childList: true,
-    });
-    window.__ercodingDatesSelectedObserver = obs;
-    window.__ercodingDatesSelectedObserverDisconnect = function () {
-      try {
-        obs.disconnect();
-      } catch (e) {}
-    };
   }
 
-  ensureSharedDatesSelectedObserver();
+  window.__ercodingEnsureDatesSelectedObserver({ minStableMsNumber: 500 });
+  window.__ercodingDatesSelectedCallbacks.push(hideOverlayWhenDatesSelected);
 
   function hideOverlayWhenDatesSelected() {
     const t = document.querySelector('.wpbs-main-wrapper-calendar-1');
