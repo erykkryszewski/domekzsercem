@@ -70,70 +70,91 @@
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
-  const formFieldsElement = document.querySelector('.wpbs-form-fields');
-  if (!formFieldsElement) return;
-
-  const leftColumn = document.createElement('div');
-  leftColumn.className = 'payment__column payment__column--left';
-
-  const rightColumn = document.createElement('div');
-  rightColumn.className = 'payment__column payment__column--right';
-
-  const rightSelectors = [
-    '.wpbs-form-field-part-payment-applicability',
-    '.wpbs-form-field-coupon',
-    '.payment__discount',
-    '.payment__total',
-    '.payment__options',
-  ];
-
-  const leftSelectors = ['.calendar-maybe-if-it-will-work'];
-
-  Array.from(formFieldsElement.children).forEach(function (child) {
-    if (
-      rightSelectors.some(function (selector) {
-        return child.matches(selector);
-      })
-    ) {
-      rightColumn.appendChild(child);
-    } else if (
-      leftSelectors.some(function (selector) {
-        return child.matches(selector);
-      })
-    ) {
-      leftColumn.prepend(child);
-    } else {
-      leftColumn.appendChild(child);
-    }
-  });
-
-  formFieldsElement.innerHTML = '';
-  formFieldsElement.appendChild(leftColumn);
-  formFieldsElement.appendChild(rightColumn);
-
   const ercodingIntervalMs = 300;
 
-  let calendarCheckIntervalId = null;
-  function startCalendarCheck() {
-    if (calendarCheckIntervalId) return;
-    calendarCheckIntervalId = setInterval(function () {
-      const calendarElement = document.querySelector('.calendar-maybe-if-it-will-work');
-      if (!calendarElement) return;
-      if (!leftColumn.contains(calendarElement)) {
-        leftColumn.prepend(calendarElement);
-      }
-      clearInterval(calendarCheckIntervalId);
-      calendarCheckIntervalId = null;
-    }, ercodingIntervalMs);
+  function getCurrentFormFieldsElement() {
+    return document.querySelector('.wpbs-form-fields');
   }
 
-  startCalendarCheck();
+  function isAlreadyInitialized(node) {
+    if (!node) return false;
+    return node.getAttribute('data-ercoding-init') === '1';
+  }
 
-  window.__ercodingEnsureDatesSelectedObserver({ minStableMsNumber: 500 });
+  function markInitialized(node) {
+    if (!node) return;
+    node.setAttribute('data-ercoding-init', '1');
+  }
+
+  function buildPaymentColumns() {
+    const formFieldsElement = getCurrentFormFieldsElement();
+    if (!formFieldsElement) return;
+    if (isAlreadyInitialized(formFieldsElement)) return;
+
+    const leftColumn = document.createElement('div');
+    leftColumn.className = 'payment__column payment__column--left';
+
+    const rightColumn = document.createElement('div');
+    rightColumn.className = 'payment__column payment__column--right';
+
+    const rightSelectors = [
+      '.wpbs-form-field-part-payment-applicability',
+      '.wpbs-form-field-coupon',
+      '.payment__discount',
+      '.payment__total',
+      '.payment__options',
+    ];
+
+    const leftSelectors = ['.calendar-maybe-if-it-will-work'];
+
+    const childrenArray = Array.from(formFieldsElement.children);
+    for (let i = 0; i < childrenArray.length; i++) {
+      const child = childrenArray[i];
+      const goesRight = rightSelectors.some(function (selector) {
+        return child.matches(selector);
+      });
+      const goesLeftPrepend = leftSelectors.some(function (selector) {
+        return child.matches(selector);
+      });
+      if (goesRight) {
+        rightColumn.appendChild(child);
+      } else if (goesLeftPrepend) {
+        leftColumn.prepend(child);
+      } else {
+        leftColumn.appendChild(child);
+      }
+    }
+
+    formFieldsElement.innerHTML = '';
+    formFieldsElement.appendChild(leftColumn);
+    formFieldsElement.appendChild(rightColumn);
+    markInitialized(formFieldsElement);
+
+    let calendarCheckIntervalId = null;
+    function startCalendarCheck() {
+      if (calendarCheckIntervalId) return;
+      calendarCheckIntervalId = setInterval(function () {
+        const calendarElement = document.querySelector('.calendar-maybe-if-it-will-work');
+        if (!calendarElement) return;
+        if (!leftColumn.contains(calendarElement)) {
+          leftColumn.prepend(calendarElement);
+        }
+        clearInterval(calendarCheckIntervalId);
+        calendarCheckIntervalId = null;
+      }, ercodingIntervalMs);
+    }
+    startCalendarCheck();
+
+    window.__ercodingEnsureDatesSelectedObserver({ minStableMsNumber: 500 });
+    ensureRightColumnToggleRegistered();
+    toggleRightColumnOnDatesSelected();
+  }
 
   function toggleRightColumnOnDatesSelected() {
     const targetElement = document.querySelector('.wpbs-main-wrapper-calendar-1');
     if (!targetElement) return;
+    const rightColumn = document.querySelector('.payment__column.payment__column--right');
+    if (!rightColumn) return;
     const hasClass = targetElement.classList.contains('wpbs-dates-selected');
     if (hasClass) {
       if (!rightColumn.classList.contains('payment__column--hide-after')) {
@@ -146,8 +167,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  window.__ercodingDatesSelectedCallbacks.push(toggleRightColumnOnDatesSelected);
-  toggleRightColumnOnDatesSelected();
+  function ensureRightColumnToggleRegistered() {
+    if (!window.__ercodingDatesSelectedCallbacks) window.__ercodingDatesSelectedCallbacks = [];
+    if (window.__ercodingRightToggleRegisteredFlag) return;
+    window.__ercodingDatesSelectedCallbacks.push(toggleRightColumnOnDatesSelected);
+    window.__ercodingRightToggleRegisteredFlag = true;
+  }
+
+  function needsRebuild() {
+    const formFieldsElement = getCurrentFormFieldsElement();
+    if (!formFieldsElement) return false;
+    const leftColumn = formFieldsElement.querySelector('.payment__column.payment__column--left');
+    const rightColumn = formFieldsElement.querySelector('.payment__column.payment__column--right');
+    if (!leftColumn || !rightColumn) return true;
+    if (!isAlreadyInitialized(formFieldsElement)) return true;
+    return false;
+  }
+
+  function ensureBuilt() {
+    if (needsRebuild()) buildPaymentColumns();
+  }
+
+  buildPaymentColumns();
+
+  const liveObserver = new MutationObserver(function () {
+    ensureBuilt();
+  });
+  liveObserver.observe(document.body, { childList: true, subtree: true });
+
+  setInterval(function () {
+    ensureBuilt();
+  }, 1000);
 });
 
 (function () {

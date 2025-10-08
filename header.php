@@ -18,6 +18,8 @@ $header_button_before_icon = get_field("header_button_before_icon", "options");
 $header_button_after_icon = get_field("header_button_after_icon", "options");
 
 $body_classes = get_body_class();
+
+$url = "http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +62,9 @@ $body_classes = get_body_class();
                     </div>
                 </nav>
             </div>
+            <?php if (strpos($url, 'zarezerwuj') == false):?>
             <a href="/zarezerwuj/" class="button mobile-only booking-button">Zarezerwuj</a>
+            <?php endif;?>
         </header>
     
 

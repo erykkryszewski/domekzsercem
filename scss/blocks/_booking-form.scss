@@ -13,9 +13,11 @@
         padding: 0 !important;
 
         .wpbs-form-field.wpbs-form-submit-button {
-          // position: absolute;
-          // bottom: 0;
-          // left: 410px;
+          @media (width >= 992px) {
+            position: absolute;
+            top: 100px;
+            right: 385px;
+          }
 
           button {
             border: 1px solid $theme-color3 !important;
@@ -82,8 +84,8 @@
       gap: 30px;
       width: 100%;
 
-      @media (width <= 767px) {
-        flex-direction: column;
+      @media (width <= 992px) {
+        flex-direction: column-reverse;
       }
 
       .wpbs-form-field {
@@ -174,9 +176,13 @@
         background: $theme-color2;
         border-radius: 10px;
         z-index: 2;
+
+        @media (width <= 991px) {
+          content: 'Wybierz datę w kalendarzu u góry';
+        }
       }
 
-      @media (width >= 1200px) {
+      @media (width >= 992px) {
         margin: -528px 0 0;
       }
     }
@@ -217,6 +223,7 @@
       border-radius: 5px;
       overflow: hidden !important;
       width: calc(100% - 2px) !important;
+      height: calc(100% - 3px) !important;
     }
 
     .wpbs-legend-icon-select svg {

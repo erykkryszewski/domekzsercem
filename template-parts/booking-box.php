@@ -1,8 +1,9 @@
 <?php
-
 $price_per_night = 400;
 $discount_name = 'Rabat workation';
-$discount_amount = 340;
+$discount_amount = '';
+
+$discount_enabled = is_numeric($discount_amount) && floatval($discount_amount) > 0;
 ?>
 
 <div class="booking-box">
@@ -10,11 +11,15 @@ $discount_amount = 340;
         <h4 class="booking-box__title">💵 Cena zawiera wszystkie opłaty!</h4>
     </div>
 
-    <form class="booking-box__form" method="get" action="/zarezerwuj/" data-price-per-night="<?php echo esc_attr(
-      $price_per_night,
-    ); ?>"
-        data-discount-name="<?php echo esc_attr($discount_name); ?>"
-        data-discount-amount="<?php echo esc_attr($discount_amount); ?>"
+    <form
+        class="booking-box__form"
+        method="get"
+        action="/zarezerwuj/"
+        data-price-per-night="<?php echo esc_attr($price_per_night); ?>"
+        <?php if ($discount_enabled): ?>
+            data-discount-name="<?php echo esc_attr($discount_name); ?>"
+            data-discount-amount="<?php echo esc_attr($discount_amount); ?>"
+        <?php endif; ?>
     >
         <div class="booking-box__dates">
             <div class="booking-box__date" data-focus="checkin">
@@ -47,12 +52,16 @@ $discount_amount = 340;
                 <span class="booking-box__text" data-nights-text>—</span>
                 <span class="booking-box__price" data-nights-price>—</span>
             </div>
+
+            <?php if ($discount_enabled): ?>
             <div class="booking-box__line" data-discount-row>
                 <span class="booking-box__text" data-discount-name><?php echo esc_html($discount_name); ?></span>
-                <span class="booking-box__price" data-discount-amount>-<?php echo esc_html(
-                  number_format($discount_amount, 0, ',', ' '),
-                ); ?> zł</span>
+                <span class="booking-box__price" data-discount-amount>
+                    -<?php echo esc_html(number_format((float) $discount_amount, 0, ',', ' ')); ?> zł
+                </span>
             </div>
+            <?php endif; ?>
+
             <div class="booking-box__total">
                 <span class="booking-box__total-label">RAZEM:</span>
                 <span class="booking-box__total-price" data-total>—</span>
@@ -62,8 +71,10 @@ $discount_amount = 340;
 
         <input type="hidden" name="nights" value="" data-nights-input />
         <input type="hidden" name="price_per_night" value="<?php echo esc_attr($price_per_night); ?>" />
-        <input type="hidden" name="discount_name" value="<?php echo esc_attr($discount_name); ?>" />
-        <input type="hidden" name="discount_amount" value="<?php echo esc_attr($discount_amount); ?>" />
+        <?php if ($discount_enabled): ?>
+            <input type="hidden" name="discount_name" value="<?php echo esc_attr($discount_name); ?>" />
+            <input type="hidden" name="discount_amount" value="<?php echo esc_attr($discount_amount); ?>" />
+        <?php endif; ?>
         <input type="hidden" name="total" value="" data-total-input />
 
         <div class="booking-box__actions">

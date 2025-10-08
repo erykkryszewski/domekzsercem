@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
     return s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' zł';
   }
 
+  function addDaysToIso(isoString, daysNumber) {
+    const d = new Date(isoString);
+    if (isNaN(d.getTime())) return '';
+    d.setDate(d.getDate() + daysNumber);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + dd;
+  }
+
   function getTodayIso() {
     const nowDate = new Date();
     const y = nowDate.getFullYear();
@@ -218,11 +228,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const calendarRoot = await waitForElement('.wpbs-main-wrapper .wpbs-container', 10000);
     const bookingFormRoot = await waitForElement('form.wpbs-form-container', 10000);
     if (!calendarRoot || !bookingFormRoot) return;
+
     const params = parseQueryParams();
     const checkinStr = params['checkin'] || '';
-    const checkoutStr = params['checkout'] || '';
+    let checkoutStr = params['checkout'] || '';
     const guestsStr = params['guests'] || '';
+
     if (checkinStr && checkoutStr) {
+      const inDateTmp = new Date(checkinStr);
+      const outDateTmp = new Date(checkoutStr);
+      if (!isNaN(inDateTmp.getTime()) && !isNaN(outDateTmp.getTime())) {
+        if (outDateTmp.getTime() - inDateTmp.getTime() <= 0) {
+          checkoutStr = addDaysToIso(checkinStr, 1);
+        }
+      } else {
+        checkoutStr = addDaysToIso(checkinStr, 1);
+      }
       let tries = 0;
       let ok = false;
       while (tries < 8 && ok === false) {
@@ -232,6 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tries += 1;
       }
     }
+
     if (guestsStr) {
       const parsedGuests = parseGuestsString(guestsStr);
       fillExtraPersons(parsedGuests.totalPersons);
@@ -239,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function initHomepageWidget() {
+    const homepageFormElement = document.querySelector('.booking-box__form');
     if (!homepageFormElement) return;
 
     const checkinInputElement = document.getElementById('checkin');
@@ -254,6 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pricePerNightValue = Number(homepageFormElement.getAttribute('data-price-per-night') || '0');
     const discountNameValue = String(homepageFormElement.getAttribute('data-discount-name') || '');
     const discountAmountValue = Number(homepageFormElement.getAttribute('data-discount-amount') || '0');
+    const discountEnabledFlag = discountAmountValue > 0 && discountNameValue !== '';
 
     const todayIsoValue = getTodayIso();
     if (checkinInputElement) {
@@ -263,7 +287,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    function applyDiscountVisibilityAtStart() {
+      if (!discountEnabledFlag) {
+        const hiddenDiscountNameInput = homepageFormElement.querySelector('input[name="discount_name"]');
+        const hiddenDiscountAmountInput = homepageFormElement.querySelector('input[name="discount_amount"]');
+        if (hiddenDiscountNameInput) hiddenDiscountNameInput.disabled = true;
+        if (hiddenDiscountAmountInput) hiddenDiscountAmountInput.disabled = true;
+        if (discountRowElement) discountRowElement.style.display = 'none';
+      }
+    }
+
     function setMinCheckout() {
+      if (!checkinInputElement || !checkoutInputElement) return;
       if (!checkinInputElement.value) return;
       const inDate = new Date(checkinInputElement.value);
       const minOut = new Date(inDate.getTime() + 24 * 60 * 60 * 1000);
@@ -280,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!checkinInputElement.value || !checkoutInputElement.value) {
         nightsTextElement.textContent = '—';
         nightsPriceElement.textContent = '—';
-        totalElement.textContent = '—';
+        totalElement.textContent = 'wybierz datę';
         nightsHiddenInputElement.value = '';
         totalHiddenInputElement.value = '';
         return;
@@ -292,20 +327,21 @@ document.addEventListener('DOMContentLoaded', function () {
       if (nightsCount <= 0) {
         nightsTextElement.textContent = '—';
         nightsPriceElement.textContent = '—';
-        totalElement.textContent = '—';
+        totalElement.textContent = 'wybierz datę';
         nightsHiddenInputElement.value = '';
         totalHiddenInputElement.value = '';
         return;
       }
       const baseAmount = nightsCount * pricePerNightValue;
       let discountApplied = 0;
-      if (discountAmountValue > 0) discountApplied = discountAmountValue;
+      if (discountEnabledFlag && discountAmountValue > 0) discountApplied = discountAmountValue;
       const totalAmount = Math.max(0, baseAmount - discountApplied);
       nightsTextElement.textContent = nightsCount + ' nocy';
       nightsPriceElement.textContent = formatPln(baseAmount);
-      discountNameElement.textContent = discountNameValue;
-      discountAmountElement.textContent = '-' + formatPln(discountApplied);
-      discountRowElement.style.display = discountApplied > 0 ? '' : 'none';
+      if (discountRowElement)
+        discountRowElement.style.display = discountEnabledFlag && discountApplied > 0 ? '' : 'none';
+      if (discountNameElement) discountNameElement.textContent = discountNameValue;
+      if (discountAmountElement) discountAmountElement.textContent = '-' + formatPln(discountApplied);
       totalElement.textContent = formatPln(totalAmount);
       nightsHiddenInputElement.value = String(nightsCount);
       totalHiddenInputElement.value = String(totalAmount);
@@ -334,6 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
       checkoutInputElement.addEventListener('change', recalcSummary);
     }
 
+    applyDiscountVisibilityAtStart();
     setMinCheckout();
     recalcSummary();
 
